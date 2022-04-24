@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Payroll-Payroll Deduction</title>
+  <link rel="icon" href="../static/tab_logo.png">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
+  <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
+  <!-- NAVBAR > icon -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.2/iconfont/material-icons.min.css'>
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='NavBarStyle.css') }}"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='AddEmpStyle.css') }}"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='TableStyle.css') }}"> -->
+  <link rel="stylesheet" type="text/css" href=../static/NavBarStyle.css>
+  <link rel="stylesheet" type="text/css" href=../static/TableStyle.css>
+</head>
+
+<header class="header">
+  <nav class="navbar">
+    <span class="open-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+        <g fill="#252a32" fill-rule="evenodd">
+          <path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z" />
+        </g>
+      </svg>
+    </span>
+    <h1><a href="./HomePage.html" class="brand">FCUC Enterprise Solutions</a></h1>
+    <div class="menu-wrapper">
+      <ul class="menu">
+        <li class="menu-block">
+          <span class="close-menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+              <path fill="#252a32" fill-rule="evenodd" d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z" />
+            </svg>
+          </span>
+        </li>
+        <li class="menu-item"><a href="./MyProfile.html" class="menu-link">My Profile</a></li>
+        <li class="menu-item"><a href="./HomePage.html" class="menu-link">Home Page</a></li>
+        <li class="menu-item has-collapsible">
+          <a href="#"><span></span>Employee</a>
+          <ul class="menu-child">
+            <li class="menu-child-item"><a href="./AddEmployee.html">Add</a></li>
+            <li class="menu-child-item"><a href="./SearchEmployee.html">Search</a></li>
+            <li class="menu-child-item"><a href="./EmployeeDocumentation.html">Documentation</a></li>
+          </ul>
+        </li>
+        <li class="menu-item has-collapsible">
+          <a href="#"><span></span>Payroll</a>
+          <ul class="menu-child">
+            <li class="menu-child-item"><a href="./Overtime.html">Overtime Payment</a></li>
+            <li class="menu-child-item"><a href="./PayrollDeduction.html">Payroll Deduction</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<body>
+  <div class="container">
+    <table class="responsive-table">
+      <caption>Payroll Deduction</caption>
+      <thead>
+        <tr>
+          <th scope="col">Work ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Department</th>
+          <th scope="col">Salary (RM)</th>
+          <th scope="col">Deducted Salary (RM)</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Edit deduction</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">B1499</th>
+          <td data-title="Name">JEREMY PUN KHENG MING</td>
+          <td data-title="Department">Information Technology</td>
+          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
+          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
+          <td data-title="Hire Date">Late for work</td>
+          <td data-title="Edit Deduction"><button id="editButton" type="button" onclick="location.href='EditPayroll.html'">Edit</button></td>
+          <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <!-- <td colspan="6"> -->
+          <td data-title="Delete"><button id="addPayrollDeductionButton" type="button" onclick="location.href='AddPayrollDeduction.html'">Add Deduction</button></td>
+        </tr>
+        <tr>
+          <td colspan="7">Data is current as of March 31, 2021.</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+  <script>
+  // //get a reference to the element
+  // var editButton = document.getElementById('editButton');
+  // var deleteButton = document.getElementById('deleteButton');
+  //
+  // //add event listener
+  // editButton.addEventListener('click', function(event) {
+  //   swal({
+  //     title: "Are you sure?",
+  //     text: "You will not be able to recover this imaginary file!",
+  //     type: "warning",
+  //     showCancelButton: true,
+  //     showConfirmButton: true,
+  //     confirmButtonColor: '#DD6B55',
+  //     confirmButtonText: 'Yes, I am sure!',
+  //     cancelButtonText: "No, cancel it!",
+  //   })
+  //   .then((result) => {
+  //     if(result){
+  //       window.location = "Overtime.html";
+  //     }
+  //     else{
+  //       window.location = "PayrollDeduction.html";
+  //     }
+  //   });
+  // });
+  // deleteButton.addEventListener('click', function(event) {
+  //   swal({
+  //     title: 'Employee was successfully added!',
+  //     type: 'success',
+  //   }).then(() => {
+  //     if (result.value) {
+  //       // handle Confirm button click
+  //     } else {
+  //       // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+  //     }
+  //   });
+  // });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
+  <script  src="../static/NavBarScript.js"></script>
+</body>
+</html>
