@@ -24,11 +24,6 @@ table = 'employee'
 def home():
     return render_template('HomePage.html')
 
-@app.route("/search", methods=['GET', 'POST'])
-def search():
-    return render_template('SearchEmployee.html')
-
-
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
