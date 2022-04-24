@@ -34,21 +34,21 @@
 						</svg>
 					</span>
 				</li>
-        <li class="menu-item"><a href="{{ url_for('template',filename='MyProfile.html') }}" class="menu-link">My Profile</a></li>
-        <li class="menu-item"><a href="{{ url_for('template',filename='HomePage.html') }}" class="menu-link">Home Page</a></li>
+        <li class="menu-item"><a href="{{ url_for('templates',filename='MyProfile.html') }}" class="menu-link">My Profile</a></li>
+        <li class="menu-item"><a href="{{ url_for('templates',filename='HomePage.html') }}" class="menu-link">Home Page</a></li>
         <li class="menu-item has-collapsible">
           <a href="#"><span></span>Employee</a>
           <ul class="menu-child">
-            <li class="menu-child-item"><a href="{{ url_for('template',filename='AddEmployee.html') }}">Add</a></li>
-            <li class="menu-child-item"><a href="{{ url_for('template',filename='SearchEmployee.html') }}">Search</a></li>
-            <li class="menu-child-item"><a href="{{ url_for('template',filename='EmployeeDocumentation.html') }}">Documentation</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('templates',filename='AddEmployee.html') }}">Add</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('templates',filename='SearchEmployee.html') }}">Search</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('templates',filename='EmployeeDocumentation.html') }}">Documentation</a></li>
           </ul>
         </li>
         <li class="menu-item has-collapsible">
 					<a href="#"><span></span>Payroll</a>
 					<ul class="menu-child">
-						<li class="menu-child-item"><a href="{{ url_for('template',filename='Overtime.html') }}">Overtime Payment</a></li>
-						<li class="menu-child-item"><a href="{{ url_for('template',filename='PayrollDeduction.html') }}">Payroll Deduction</a></li>
+						<li class="menu-child-item"><a href="{{ url_for('templates',filename='Overtime.html') }}">Overtime Payment</a></li>
+						<li class="menu-child-item"><a href="{{ url_for('templates',filename='PayrollDeduction.html') }}">Payroll Deduction</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -64,7 +64,7 @@
         <div class="card__content">
           <div class="card__title">Search Employee</div>
           <p class="card__text">Looking for someone from the corporate? Search and filter their profile here.</p>
-          <button class="btn btn--block card__btn" onclick="{{ url_for('template',filename='SearchEmployee.html') }}">Search</button>
+          <button class="btn btn--block card__btn" onclick="{{ url_for('templates',filename='SearchEmployee.html') }}">Search</button>
         </div>
       </div>
     </li>
@@ -74,7 +74,7 @@
         <div class="card__content">
           <div class="card__title">Add Employee</div>
           <p class="card__text">Set up an employee in FCUC Enterprise Solutions. Add their basic information, start date, wages and tax details.</p>
-          <button class="btn btn--block card__btn" onclick="{{ url_for('template',filename='AddEmployee.html') }}">Add</button>
+          <button class="btn btn--block card__btn" onclick="{{ url_for('templates',filename='AddEmployee.html') }}">Add</button>
         </div>
       </div>
     </li>
@@ -84,7 +84,7 @@
         <div class="card__content">
           <div class="card__title">Employee Documentation</div>
           <p class="card__text">Through this activity you can view the completion status of the information recorded on the various personal information aspects of the employee viz., contact information, work experience information etc.</p>
-          <button class="btn btn--block card__btn" onclick="{{ url_for('template',filename='EmployeeDocumentation.html') }}">View</button>
+          <button class="btn btn--block card__btn" onclick="{{ url_for('templates',filename='EmployeeDocumentation.html') }}">View</button>
         </div>
       </div>
     </li>
@@ -94,7 +94,7 @@
         <div class="card__content">
           <div class="card__title">Payroll</div>
           <p class="card__text">Manage everything having to do with the process of paying employees and filing employment taxes.</p>
-          <button class="btn btn--block card__btn" onclick="{{ url_for('template',filename='Payroll.html') }}">Process</button>
+          <button class="btn btn--block card__btn" onclick="{{ url_for('templates',filename='Payroll.html') }}">Process</button>
         </div>
       </div>
     </li>
