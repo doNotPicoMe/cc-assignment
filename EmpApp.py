@@ -66,6 +66,7 @@ def AddEmp():
     location = request.form['location']
     email = request.form['email']
     age = request.form['age']
+    gender = request.form['gender']
     hire_date = request.form['hire_date']
     job_id= '1'
     dept_id= '1'
