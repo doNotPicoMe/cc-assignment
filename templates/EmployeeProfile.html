@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../static/tab_logo.png">
+  <title>Employee-Profile</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
+  <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
+  <!-- NAVBAR > icon -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.2/iconfont/material-icons.min.css'>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='NavBarStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='ProfileStyle.css') }}">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'>
+</head>
+<header class="header">
+	<nav class="navbar">
+		<span class="open-menu">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+				<g fill="#252a32" fill-rule="evenodd">
+					<path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z" />
+				</g>
+			</svg>
+		</span>
+    <h1><a href="{{ url_for('home_page') }}" class="brand">FCUC Enterprise Solutions</a></h1>
+		<div class="menu-wrapper">
+			<ul class="menu">
+				<li class="menu-block">
+					<span class="close-menu">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+							<path fill="#252a32" fill-rule="evenodd" d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z" />
+						</svg>
+					</span>
+				</li>
+        <li class="menu-item"><a href="{{ url_for('my_profile') }}" class="menu-link">My Profile</a></li>
+        <li class="menu-item"><a href="{{ url_for('home_page') }}" class="menu-link">Home Page</a></li>
+        <li class="menu-item has-collapsible">
+          <a><span></span>Employee</a>
+          <ul class="menu-child">
+            <li class="menu-child-item"><a href="{{ url_for('add_employee') }}">Add</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('search_employee') }}">Search</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('employee_documentation') }}">Documentation</a></li>
+          </ul>
+        </li>
+        <li class="menu-item has-collapsible">
+					<a><span></span>Payroll</a>
+					<ul class="menu-child">
+						<li class="menu-child-item"><a href="{{ url_for('overtime') }}">Overtime Payment</a></li>
+						<li class="menu-child-item"><a href="{{ url_for('payroll_deduction') }}">Payroll Deduction</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<body>
+  <!-- partial:index.partial.html -->
+  <section class="background_container">
+    <section class="profile_container">
+      <div class="profile_img_section">
+        <!-- <img class="profile_img-LG" src="https://cdn.idntimes.com/content-images/community/2020/10/122163576-262420488513552-863075192792965334-n-f95e3dd6d25d3618eb9f1b3b9bcc5796.jpg" /> -->
+  <!-- <img class="profile_img-LG" src="{{ image_url }}" /> -->
+  <img class="profile_img-LG" src="../static/SUZY.jpg"/>
+      </div>
+
+      <div class="profile_desc_section">
+        <h2>{{ fname }}{{ lname }} </h2>
+        <h3>CEO</h3>
+        <p class="description">{{ gender }}</p>
+        <div class="interests">
+          <span class="interests_item">{{ interest }}</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="info">
+      <ul>
+        <li>
+          <div class="link_img_wrapper">
+            <img class="link_img" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/round-pushpin_1f4cd.png" alt="">
+          </div>
+          <p>{{ location }} </p>
+        </li>
+        <li>
+          <div class="link_img_wrapper">
+            <img class="link_img" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/speaking-head_1f5e3-fe0f.png" alt="">
+          </div>
+          <p>Korean, English</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <span class="back">
+		<button type="submit" id="back_text">GO BACK</button>
+	</span>
+  <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
+</body>
+</html>
