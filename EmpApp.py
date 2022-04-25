@@ -73,7 +73,7 @@ def add_employee_function():
     department = request.form['department']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s)"
+    insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
