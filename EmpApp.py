@@ -57,7 +57,7 @@ def payroll_deduction():
 def add_employee():
     return render_template('AddEmployee.html')
 
-@app.route("/add_employee/addemp", methods=['POST'])
+@app.route("/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
