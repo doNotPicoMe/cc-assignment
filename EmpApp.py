@@ -55,7 +55,7 @@ def payroll_deduction():
 
 @app.route("/add_employee", methods=['GET', 'POST'])
 def add_employee():
-        return render_template('AddEmployee.html')
+    return render_template('AddEmployee.html')
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -73,12 +73,15 @@ def AddEmp():
     department = request.form['department']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES('emp_id', 'first_name', 'last_name','pri_skill', 'location','job','department','gender','email','salary','hire_date','age')"
     cursor = db_conn.cursor()
+
+    if emp_image_file.filename == "":
+        return "Please select a file"
 
     try:
 
-        cursor.execute(insert_sql, (emp_id,first_name,last_name,pri_skill,location,job,department,gender,email,salary,hire_date,age))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job_id,dept_id,gender,email,salary,hire_date,age))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -106,6 +109,11 @@ def AddEmp():
 
     finally:
         cursor.close()
+
+    # Not relevant to our design
+    print("all modification done...")
+    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
