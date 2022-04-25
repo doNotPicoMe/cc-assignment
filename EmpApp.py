@@ -68,6 +68,7 @@ def AddEmp():
     age = request.form['age']
     hire_date = request.form['hire_date']
     job_id= '1'
+    dept_id= '1'
     emp_image_file = request.files['emp_image_file']
     resume_image_file = request.files['resume_image_file']
 
@@ -82,7 +83,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,email))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job_id,dept_id,gender,email,age,hire_date))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
