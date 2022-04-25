@@ -116,7 +116,7 @@ def AddEmp():
 
     # Not relevant to our design
     print("all modification done...")
-    return render_template('employeeDocumentation.html', name=emp_name)
+    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
 
 
 if __name__ == '__main__':
