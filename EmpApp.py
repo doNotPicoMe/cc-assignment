@@ -79,9 +79,6 @@ def AddEmp():
     if emp_image_file.filename == "":
         return "Please select a file"
 
-    if resume_image_file.filename == "":
-        return "Please select a file"
-
     try:
 
         cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job_id,dept_id,gender,email,salary,hire_date,age))
