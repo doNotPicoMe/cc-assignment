@@ -11,8 +11,6 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.2/iconfont/material-icons.min.css'>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='NavBarStyle.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='CardStyle.css') }}">
-  <!-- <link rel="stylesheet" type="text/css" href=../static/NavBarStyle.css>
-  <link rel="stylesheet" type="text/css" href=../static/CardStyle.css> -->
 </head>
 
 <header class="header">
@@ -34,21 +32,21 @@
 						</svg>
 					</span>
 				</li>
-        <li class="menu-item"><a href="./MyProfile.html" class="menu-link">My Profile</a></li>
-        <li class="menu-item"><a href="./HomePage.html" class="menu-link">Home Page</a></li>
+        <li class="menu-item"><a href="{{ url_for('my_profile') }}" class="menu-link">My Profile</a></li>
+        <li class="menu-item"><a href="{{ url_for('home_page') }}" class="menu-link">Home Page</a></li>
         <li class="menu-item has-collapsible">
           <a href="#"><span></span>Employee</a>
           <ul class="menu-child">
-            <li class="menu-child-item"><a href="./AddEmployee.html">Add</a></li>
-            <li class="menu-child-item"><a href="./SearchEmployee.html">Search</a></li>
-            <li class="menu-child-item"><a href="./EmployeeDocumentation.html">Documentation</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('add_employee') }}">Add</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('search_employee') }}">Search</a></li>
+            <li class="menu-child-item"><a href="{{ url_for('employee_documentation') }}">Documentation</a></li>
           </ul>
         </li>
         <li class="menu-item has-collapsible">
-					<a href="#"><span></span>Payroll</a>
+					<a href="{{ url_for('payroll') }}"><span></span>Payroll</a>
 					<ul class="menu-child">
-						<li class="menu-child-item"><a href="./Overtime.html">Overtime Payment</a></li>
-						<li class="menu-child-item"><a href="./PayrollDeduction.html">Payroll Deduction</a></li>
+						<li class="menu-child-item"><a href="{{ url_for('overtime') }}">Overtime Payment</a></li>
+						<li class="menu-child-item"><a href="{{ url_for('payroll_deduction') }}">Payroll Deduction</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -74,7 +72,7 @@
         <div class="card__content">
           <div class="card__title">Add Employee</div>
           <p class="card__text">Set up an employee in FCUC Enterprise Solutions. Add their basic information, start date, wages and tax details.</p>
-          <button class="btn btn--block card__btn" onclick="location.href='AddEmployee.html'">Add</button>
+          <button class="btn btn--block card__btn" onclick="location.href='{{ url_for('add_employee') }}'">Add</button>
         </div>
       </div>
     </li>
@@ -84,7 +82,7 @@
         <div class="card__content">
           <div class="card__title">Employee Documentation</div>
           <p class="card__text">Through this activity you can view the completion status of the information recorded on the various personal information aspects of the employee viz., contact information, work experience information etc.</p>
-          <button class="btn btn--block card__btn" onclick="location.href='EmployeeDocumentation.html'">View</button>
+          <button class="btn btn--block card__btn" onclick="location.href='{{ url_for('employee_documentation') }}'">View</button>
         </div>
       </div>
     </li>
@@ -94,7 +92,7 @@
         <div class="card__content">
           <div class="card__title">Payroll</div>
           <p class="card__text">Manage everything having to do with the process of paying employees and filing employment taxes.</p>
-          <button class="btn btn--block card__btn" onclick="location.href='Payroll.html'">Process</button>
+          <button class="btn btn--block card__btn" onclick="location.href='{{ url_for('payroll') }}'">Process</button>
         </div>
       </div>
     </li>
