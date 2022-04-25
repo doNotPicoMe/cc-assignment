@@ -55,63 +55,6 @@ def payroll_deduction():
 
 @app.route("/add_employee", methods=['GET', 'POST'])
 def add_employee():
-    if request.method=="POST":
-    emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
-    email = request.form['email']
-    age = request.form['age']
-    gender = request.form['gender']
-    hire_date = request.form['hire_date']
-    salary = request.form['salary']
-    job_id = request.form['job_id']
-    dept_id = request.form['dept_id']
-    emp_image_file = request.files['emp_image_file']
-
-    insert_sql = "INSERT INTO employee VALUES('emp_id', 'first_name', 'last_name','pri_skill', 'location','job_id','dept_id','gender','email','salary','hire_date','age')"
-    cursor = db_conn.cursor()
-
-    if emp_image_file.filename == "":
-        return "Please select a file"
-
-    try:
-
-        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job_id,dept_id,gender,email,salary,hire_date,age))
-        db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource('s3')
-
-        try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-            s3_location = (bucket_location['LocationConstraint'])
-
-            if s3_location is None:
-                s3_location = ''
-            else:
-                s3_location = '-' + s3_location
-
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                emp_image_file_name_in_s3)
-
-        except Exception as e:
-            return str(e)
-
-    finally:
-        cursor.close()
-
-    # Not relevant to our design
-    print("all modification done...")
-    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
-
-    else
         return render_template('AddEmployee.html')
 
 @app.route("/addemp", methods=['POST'])
@@ -132,7 +75,6 @@ def AddEmp():
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s)"
     cursor = db_conn.cursor()
-
 
     try:
 
