@@ -138,7 +138,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job,department,gender,email,salary,hire_date,age))
+        cursor.execute(insert_sql, (emp_id,first_name,last_name,pri_skill,location,job,department,gender,email,salary,hire_date,age))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
