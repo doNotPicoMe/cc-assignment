@@ -24,9 +24,38 @@ table = 'employee'
 def home():
     return render_template('HomePage.html')
 
-@app.route("/about", methods=['POST'])
-def about():
-    return render_template('www.intellipaat.com')
+@app.route("/home_page", methods=['GET', 'POST'])
+def search():
+    return render_template('HomePage.html')
+
+@app.route("/search_employee", methods=['GET', 'POST'])
+def search():
+    return render_template('SearchEmployee.html')
+
+@app.route("/add_employee", methods=['GET', 'POST'])
+def search():
+    return render_template('AddEmployee.html')
+
+@app.route("/my_profile", methods=['GET', 'POST'])
+def search():
+    return render_template('MyProfile.html')
+
+@app.route("/employee_documentation", methods=['GET', 'POST'])
+def search():
+    return render_template('EmployeeDocumentation.html')
+
+@app.route("/overtime", methods=['GET', 'POST'])
+def search():
+    return render_template('Overtime.html')
+
+@app.route("/payroll", methods=['GET', 'POST'])
+def search():
+    return render_template('Payroll.html')
+
+@app.route("/payroll_deduction", methods=['GET', 'POST'])
+def search():
+    return render_template('PayrollDeduction.html')
+
 
 
 @app.route("/addemp", methods=['POST'])
