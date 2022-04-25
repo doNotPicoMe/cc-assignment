@@ -72,7 +72,6 @@ def AddEmp():
     job_id= '1'
     dept_id= '1'
     emp_image_file = request.files['emp_image_file']
-    resume_image_file = request.files['resume_image_file']
 
     insert_sql = "INSERT INTO employee (emp_id,first_name,last_name,pri_skill,location,job_id,dept_id,gender,email,salary,hire_date,age)VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     cursor = db_conn.cursor()
@@ -90,13 +89,11 @@ def AddEmp():
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        resume_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
 
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            s3.Bucket(custombucket).put_object(Key=resume_image_file_name_in_s3, Body=resume_image_file)
             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
             s3_location = (bucket_location['LocationConstraint'])
 
@@ -108,8 +105,7 @@ def AddEmp():
             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
-                emp_image_file_name_in_s3,
-                resume_image_file_name_in_s3)
+                emp_image_file_name_in_s3)
 
         except Exception as e:
             return str(e)
