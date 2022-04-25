@@ -32,9 +32,6 @@ def home_page():
 def search_employee():
     return render_template('SearchEmployee.html')
 
-@app.route("/add_employee", methods=['GET', 'POST'])
-def add_employee():
-    return render_template('AddEmployee.html')
 
 @app.route("/my_profile", methods=['GET', 'POST'])
 def my_profile():
@@ -56,9 +53,11 @@ def payroll():
 def payroll_deduction():
     return render_template('PayrollDeduction.html')
 
+@app.route("/add_employee", methods=['GET', 'POST'])
+def add_employee():
+    return render_template('AddEmployee.html')
 
-
-@app.route("/addemp", methods=['POST'])
+@app.route("/add_employee/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -66,10 +65,13 @@ def AddEmp():
     pri_skill = request.form['pri_skill']
     location = request.form['location']
     email = request.form['email']
+    age = request.form['age']
+    hire_date = request.form['hire_date']
+    job_id= '1'
     emp_image_file = request.files['emp_image_file']
     resume_image_file = request.files['resume_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s,%s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
