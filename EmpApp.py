@@ -74,7 +74,7 @@ def AddEmp():
     emp_image_file = request.files['emp_image_file']
     resume_image_file = request.files['resume_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s)"
+    insert_sql = "INSERT INTO employee (emp_id,first_name,last_name,pri_skill,location,job_id,dept_id,gender,email,salary,hire_date,age)VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
