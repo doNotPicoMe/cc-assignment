@@ -25,35 +25,35 @@ def home():
     return render_template('HomePage.html')
 
 @app.route("/home_page", methods=['GET', 'POST'])
-def search():
+def home_page():
     return render_template('HomePage.html')
 
 @app.route("/search_employee", methods=['GET', 'POST'])
-def search():
+def search_employee():
     return render_template('SearchEmployee.html')
 
 @app.route("/add_employee", methods=['GET', 'POST'])
-def search():
+def add_employee():
     return render_template('AddEmployee.html')
 
 @app.route("/my_profile", methods=['GET', 'POST'])
-def search():
+def my_profile():
     return render_template('MyProfile.html')
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
-def search():
+def employee_documentation():
     return render_template('EmployeeDocumentation.html')
 
 @app.route("/overtime", methods=['GET', 'POST'])
-def search():
+def overtime():
     return render_template('Overtime.html')
 
 @app.route("/payroll", methods=['GET', 'POST'])
-def search():
+def payroll():
     return render_template('Payroll.html')
 
 @app.route("/payroll_deduction", methods=['GET', 'POST'])
-def search():
+def payroll_deduction():
     return render_template('PayrollDeduction.html')
 
 
