@@ -66,11 +66,11 @@ def add_employee():
     gender = request.form['gender']
     hire_date = request.form['hire_date']
     salary = request.form['salary']
-    job_id = request.form['job_id']
-    dept_id = request.form['dept_id']
+    job = request.form['job']
+    department = request.form['department']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES('emp_id', 'first_name', 'last_name','pri_skill', 'location','job_id','dept_id','gender','email','salary','hire_date','age')"
+    insert_sql = "INSERT INTO employee VALUES('emp_id', 'first_name', 'last_name','pri_skill', 'location','job','department','gender','email','salary','hire_date','age')"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -78,7 +78,7 @@ def add_employee():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job_id,dept_id,gender,email,salary,hire_date,age))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name,pri_skill, location,job,department,gender,email,salary,hire_date,age))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
