@@ -57,8 +57,8 @@ def payroll_deduction():
 def add_employee():
     return render_template('AddEmployee.html')
 
-@app.route("/addemp", methods=['POST'])
-def AddEmp():
+@app.route("/add_employee_function", methods=['POST'])
+def add_employee_function():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -73,7 +73,7 @@ def AddEmp():
     department = request.form['department']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES('emp_id', 'first_name', 'last_name','pri_skill', 'location','job','department','gender','email','salary','hire_date','age')"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
