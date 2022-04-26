@@ -154,7 +154,7 @@ def search_employee_function():
 
 @app.route("/view_profile_function", methods=['GET', 'POST'])
 def edit_profile_function():
-    emp_id = request.values.get("emp_id")
+    emp_id = request.form['emp_id']
 
     search_sql= "SELECT *  FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
