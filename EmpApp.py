@@ -143,5 +143,10 @@ def search_employee_function():
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
+
+@app.route("/edit_profile_function", methods=['GET', 'POST'])
+def edit_profile_function():
+    return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
