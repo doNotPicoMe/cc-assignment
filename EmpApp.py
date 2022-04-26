@@ -110,7 +110,7 @@ def add_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 @app.route("/search_employee_function", methods=['POST'])
 def search_employee_function():
@@ -134,13 +134,14 @@ def search_employee_function():
             job= row[9]
             salary= row[10]
             hire_date= row[11]
+            emp_name = "" + first_name + " " + last_name
     # iterate over the cursor
 
     finally:
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
