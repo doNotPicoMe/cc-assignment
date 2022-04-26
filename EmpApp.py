@@ -144,9 +144,9 @@ def add_employee_function():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
+                emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
         except Exception as e:
             return str(e)
-            emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     finally:
         cursor.close()
 
