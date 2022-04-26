@@ -149,8 +149,35 @@ def search_employee_function():
 # @app.route("/edit_profile_function", methods=['GET', 'POST'])
 # def edit_profile_function():
 #     import requests
-#
+#     request.values.get("firstname")
 #     return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+
+@app.route("/view_profile_function", methods=['GET', 'POST'])
+def edit_profile_function():
+    emp_id = request.values.get("emp_id")
+
+    search_sql= "SELECT *  FROM employee WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    try:
+        cursor.execute(search_sql,(emp_id))
+        records = cursor.fetchall()
+        for row in records:
+            first_name= row[1]
+            last_name = row[2]
+            age= row[3]
+            gender= row[4]
+            location= row[5]
+            pri_skill= row[6]
+            email= row[7]
+            department= row[8]
+            job= row[9]
+            salary= row[10]
+            hire_date= row[11]
+            emp_name = "" + first_name + " " + last_name
+    # iterate over the cursor
+    finally:
+        cursor.close()
+    return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
