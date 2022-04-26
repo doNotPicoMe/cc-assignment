@@ -63,6 +63,7 @@
       </div>
       <div class="profile_desc_section">
         <h2>{{emp_name}} </h2>
+        <h3>{{ emp_id }}</h3>
         <h3>{{ job }}</h3>
         <p class="description">{{ gender }}</p>
         <div class="interests">
@@ -74,7 +75,9 @@
     </section>
   </section>
   <span class="back">
-		<button type="submit" onclick="location.href='edit_profile_function'" id="back_text">EDIT</button>
+    <form action="/edit_employee_function" autocomplete="on" method="POST">
+      <td data-title="Edit"><button id="editButton" type="submit" name="emp_id" value="{{ emp_id }}" >EDIT</button></td>
+    </form>
 	</span>
   <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
 </body>
