@@ -122,14 +122,20 @@ def search_employee_function():
     try:
         cursor.execute(search_sql,(emp_id))
         db_conn.commit()
+    # iterate over the cursor
+    for (first_name,last_name,gender,pri_skill,location,hire_date) in cursor:
+        first_name = first_name
+        last_name = last_name
+        gender = gender
+        pri_skill = pri_skill
+        location = Location
+        hire_date = hire_date
 
     finally:
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
-
-
+    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill,location=location, hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
