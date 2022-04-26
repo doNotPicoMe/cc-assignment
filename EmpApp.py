@@ -121,7 +121,7 @@ def search_employee_function():
 
     try:
         cursor.execute(search_sql,(emp_id))
-        records = cursor.fetchmany(size)
+        records = cursor.fetchall()
         for row in records:
             first_name= row[1]
             last_name = row[2]
