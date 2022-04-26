@@ -110,13 +110,13 @@ def add_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 @app.route("/search_employee_function", methods=['POST'])
 def search_employee_function():
     emp_id = request.form['emp_id']
 
-    search_sql= "SELECT emp_name,gender,pri_skill,location,hire_date FROM employee WHERE emp_id = (%s)"
+    search_sql= "SELECT first_name,last_name,gender,pri_skill,location,hire_date FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
@@ -127,7 +127,7 @@ def search_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 
 
