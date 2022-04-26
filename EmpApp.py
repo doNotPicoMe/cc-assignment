@@ -145,14 +145,7 @@ def search_employee_function():
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
 
-
-# @app.route("/edit_profile_function", methods=['GET', 'POST'])
-# def edit_profile_function():
-#     import requests
-#     request.values.get("firstname")
-#     return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
-
-@app.route("/view_profile_function", methods=['GET', 'POST'])
+@app.route("/edit_profile_function", methods=['GET', 'POST'])
 def edit_profile_function():
     emp_id = request.form['emp_id']
 
