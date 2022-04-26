@@ -56,19 +56,19 @@
     <div class="animated slideInUp form">
     <center><img style="height:110px; width:auto;" src="../static/fcuc_logo.png" alt="fcuc_logo"></center></br></br>
       <form class="login-form" action="/update_employee_function" autocomplete="on" method = "POST" enctype="multipart/form-data">
-        <input type="hidden" name="emp_id">
-        <input type="text" name="emp_id_new" placeholder="{{ emp_id }}">{{ emp_id }}</input>
-        <input type="text" name="first_name" placeholder="{{ first_name }}">{{ first_name}}</input>
-        <input type="text" name="last_name" placeholder="{{ last_name }}">{{ last_name }}</input>
-        <input type="text" name="pri_skill" placeholder="{{ pri_skill }}">{{ pri_skill}}<input/>
-        <input type="text" name="location" placeholder="{{ location }}">{{ location }}<input/>
-        <input type="text" name="email"placeholder="{{ email }}">{{ email }}</input>
-        <input type="text" name="age" placeholder="{{ age }}">{{ age }}</input>
-        <input type="text" name="gender" placeholder="{{ gender }}">{{ gender }} </input>
-        <input type="text" name="salary" placeholder="{{ salary }}">{{ salary }}</input>
-        <input type="text" name="hire_date" placeholder="{{ hire_date }}">{{ hire_date }}</input>
-        <input type="text" name="job" placeholder="{{ job }}">{{ job }}</input>
-        <input type="text" name="department" placeholder="{{ department }}">{{ department }}</input>
+        <input type="hidden" name="emp_id" values="{{ emp_id }}">
+        <input type="text" name="emp_id_new" placeholder="{{ emp_id }}" values ="{{ emp_id }}"/>
+        <input type="text" name="first_name" placeholder="{{ first_name }}" values="{{ first_name}}"/>
+        <input type="text" name="last_name" placeholder="{{ last_name }}" values ="{{ last_name }}"/>
+        <input type="text" name="pri_skill" placeholder="{{ pri_skill }}" values ="{{ pri_skill}}"/>
+        <input type="text" name="location" placeholder="{{ location }}" values = "{{ location }}"/>
+        <input type="text" name="email"placeholder="{{ email }}" values = "{{ email }}"/>
+        <input type="text" name="age" placeholder="{{ age }}" values = "{{ age }}"/>
+        <input type="text" name="gender" placeholder="{{ gender }}" values = "{{ gender }}"/>
+        <input type="text" name="salary" placeholder="{{ salary }}" values= "{{ salary }}"/>
+        <input type="text" name="hire_date" placeholder="{{ hire_date }}" values ="{{ hire_date }}"/>
+        <input type="text" name="job" placeholder="{{ job }}" values="{{ job }}"/>
+        <input type="text" name="department" placeholder="{{ department }}" values ="{{ department }}"/>
         <label>Upload Image</label>
         <input type="file" name="emp_image_file" placeholder="Image"/>
         <button type="submit" id="registerButton" value="{{ emp_id }}">Update</button>
