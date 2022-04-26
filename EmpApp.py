@@ -110,7 +110,7 @@ def add_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
+    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 
 if __name__ == '__main__':
