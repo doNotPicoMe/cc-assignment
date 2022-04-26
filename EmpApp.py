@@ -39,14 +39,9 @@ def my_profile():
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
 def employee_documentation():
-
-    try:
-        table_sql= "SELECT * FROM employee"
         cursor = db_conn.cursor()
-        cursor.execute(table_sql)
+        cursor.execute("SELECT * FROM employee")
         data = cursor.fetchall()
-    finally:
-        cursor.close()
     return render_template('EmployeeDocumentation.html', data=data)
 
 @app.route("/overtime", methods=['GET', 'POST'])
