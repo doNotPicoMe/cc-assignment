@@ -122,18 +122,18 @@ def search_employee_function():
     try:
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchmany(size)
-      for row in records:
-        first_name= row[1]
-        last_name = row[2]
-        age= row[3]
-        gender= row[4]
-        location= row[5]
-        pri_skill= row[6]
-        email= row[7]
-        department= row[8]
-        job= row[9]
-        salary= row[10]
-        hire_date= row[11]
+        for row in records:
+            first_name= row[1]
+            last_name = row[2]
+            age= row[3]
+            gender= row[4]
+            location= row[5]
+            pri_skill= row[6]
+            email= row[7]
+            department= row[8]
+            job= row[9]
+            salary= row[10]
+            hire_date= row[11]
      break
     # iterate over the cursor
 
