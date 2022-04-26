@@ -80,7 +80,10 @@
           <td data-title="Salary" data-type="currency">{{ item[10] }}</td>
           <td data-title="Email">{{ item[7] }}</td>
           <td data-title="Hire Date">{{ item[11] }}</td>
-          <form action="/search_employee_function" method="POST" ><button class="btn btn-danger" type="submit" name="emp_id" value="{{ item[0] }}"><td data-title="Resume"><button id="resumeButton" type="button"  onclick="">view</button></td></form>
+          <form action="/search_employee_function" autocomplete="on" method="POST">
+            <button class="btn btn-danger" type="submit" name="emp_id" value="{{ item[0] }}">
+            <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
+          </form>
           <td data-title="Edit Profile"><button id="editButton" type="button" onclick="">edit</button></td>
           </form>
         </tr>
