@@ -116,20 +116,32 @@ def add_employee_function():
 def search_employee_function():
     emp_id = request.form['emp_id']
 
-    search_sql= "SELECT first_name FROM employee WHERE emp_id = (%s)"
+    search_sql= "SELECT *  FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
         cursor.execute(search_sql,(emp_id))
-        first_name = cursor.fetchone()
-
+        records = cursor.fetchmany(size)
+      for row in records:
+                first_name= row[1]
+                last_name = row[2]
+                age= row[3]
+                gender= row[4]
+                location= row[5]
+                pri_skill= row[6]
+                email= row[7]
+                department= row[8]
+                job= row[9]
+                salary= row[10]
+                hire_date= row[11]
+     break 
     # iterate over the cursor
 
     finally:
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', first_name=first_name)
+    return render_template('EmployeeProfile.html', first_name=first_name,last_name=last_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
