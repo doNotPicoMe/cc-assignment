@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="../static/tab_logo.png">
-  <title>Employee-Add</title>
+  <title>Employee-Edit</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
   <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
   <!-- NAVBAR > icon -->
@@ -69,13 +69,9 @@
         <input type="text" name="department" placeholder="{{ department }}"/>
         <label>Upload Image</label>
         <input type="file" name="emp_image_file" placeholder="Image"/>
-        <button type="submit" id="registerButton">Register Employee</button>
+        <button type="submit" id="registerButton">Update</button>
         <p class="message">Looking for someone? <a href="#">Click Here</a></p>
       </form>
-      <form class="register-form" action="/search_employee_function" autocomplete="on" method="POST">
-      <input type="text" name="emp_id" placeholder="Employee ID"/>
-      <button type="submit" id="fetchButton">Fetch Info</button>
-      <p class="message">Want to add an employee? <a href="#">Click Here</a></p>
     </form>
     </div>
   </div>
