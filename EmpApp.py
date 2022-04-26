@@ -144,14 +144,13 @@ def add_employee_function():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-                emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
         except Exception as e:
             return str(e)
     finally:
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
+    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
 @app.route("/search_employee_function", methods=['POST'])
 def search_employee_function():
