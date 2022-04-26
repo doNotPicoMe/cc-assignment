@@ -71,6 +71,7 @@ def add_employee_function():
     salary = request.form['salary']
     job = request.form['job']
     department = request.form['department']
+
     emp_image_file = request.files['emp_image_file']
 
     insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -102,17 +103,12 @@ def add_employee_function():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-
+        return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
         except Exception as e:
             return str(e)
 
     finally:
         cursor.close()
-
-    # Not relevant to our design
-    print("all modification done...")
-    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
