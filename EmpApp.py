@@ -155,7 +155,6 @@ def edit_profile_function():
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
         for row in records:
-            emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
