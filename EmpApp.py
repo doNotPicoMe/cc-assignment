@@ -155,6 +155,7 @@ def edit_profile_function():
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
         for row in records:
+            row_emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
@@ -169,7 +170,7 @@ def edit_profile_function():
     # iterate over the cursor
     finally:
         cursor.close()
-    return render_template('EditEmployeeProfile.html', emp_id=emp_id, first_name=first_name, last_name=last_name, age=age, gender=gender, location=location, pri_skill=pri_skill, email=email,department=department,job=job,salary=salary,hire_date=hire_date)
+    return render_template('EditEmployeeProfile.html', emp_id=row_emp_id, first_name=first_name, last_name=last_name, age=age, gender=gender, location=location, pri_skill=pri_skill, email=email,department=department,job=job,salary=salary,hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
