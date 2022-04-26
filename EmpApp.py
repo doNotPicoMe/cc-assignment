@@ -197,7 +197,7 @@ def update_employee_function():
         return "Please select a file"
 
     try:
-        cursor.execute(update_sql,value)
+        cursor.execute(update_sql,val)
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
