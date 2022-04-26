@@ -122,7 +122,7 @@ def search_employee_function():
     try:
         cursor.execute(search_sql,(emp_id))
 
-        rows = cur.fetchall()
+        rows = cursor.fetchall()
 
         for row in rows:
             first_name=first_name
