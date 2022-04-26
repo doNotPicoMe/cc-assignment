@@ -134,7 +134,6 @@ def search_employee_function():
             job= row[9]
             salary= row[10]
             hire_date= row[11]
-     break
     # iterate over the cursor
 
     finally:
