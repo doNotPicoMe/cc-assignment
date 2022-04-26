@@ -155,6 +155,7 @@ def edit_profile_function():
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
         for row in records:
+            emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
@@ -169,7 +170,61 @@ def edit_profile_function():
     # iterate over the cursor
     finally:
         cursor.close()
-    return render_template('EditEmployeeProfile.html', first_name=first_name, last_name=last_name, age=age, gender=gender, location=location, pri_skill=pri_skill, email=email,department=department,job=job,salary=salary,hire_date=hire_date)
+    return render_template('EditEmployeeProfile.html', emp_id=emp_id,first_name=first_name, last_name=last_name, age=age, gender=gender, location=location, pri_skill=pri_skill, email=email,department=department,job=job,salary=salary,hire_date=hire_date)
+
+@app.route("/update_employee_function", methods=['POST'])
+def update_employee_function():
+    emp_id_new = request.form['emp_id_new']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    email = request.form['email']
+    age = request.form['age']
+    gender = request.form['gender']
+    hire_date = request.form['hire_date']
+    salary = request.form['salary']
+    job = request.form['job']
+    department = request.form['department']
+
+    emp_image_file = request.files['emp_image_file']
+
+    update_sql= "UPDATE employee SET emp_id=(%s), first_name = (%s), last_name = (%s), age = (%s), gender = (%s), location = (%s), pri_skill (%s), email = (%s), department = (%s), job= (%s), salary = (%s), hire_date = (%s) WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+
+    if emp_image_file.filename == "":
+        return "Please select a file"
+
+    try:
+        cursor.execute(update_sql,(emp_id_new,first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date,emp_id))
+        db_conn.commit()
+        emp_name = "" + first_name + " " + last_name
+        # Uplaod image file in S3 #
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        s3 = boto3.resource('s3')
+
+        try:
+            print("Data inserted in MySQL RDS... uploading image to S3...")
+            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
+        except Exception as e:
+            return str(e)
+    finally:
+        cursor.close()
+
+    # Not relevant to our design
+    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
