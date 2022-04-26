@@ -175,6 +175,7 @@ def edit_profile_function():
 @app.route("/update_employee_function", methods=['POST'])
 def update_employee_function():
     emp_id_new = request.form['emp_id_new']
+    emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
