@@ -39,7 +39,47 @@ def my_profile():
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
 def employee_documentation():
-    return render_template('EmployeeDocumentation.html')
+
+    search_sql= "SELECT *  FROM employee WHERE emp_id"
+    cursor = db_conn.cursor()
+
+    try:
+        cursor.execute(search_sql,(emp_id))
+        records = cursor.fetchall()
+        for row in records:
+            emp_id= row[0]
+            first_name= row[1]
+            last_name = row[2]
+            age= row[3]
+            gender= row[4]
+            location= row[5]
+            pri_skill= row[6]
+            email= row[7]
+            department= row[8]
+            job= row[9]
+            salary= row[10]
+            hire_date= row[11]
+            emp_name = "" + first_name + " " + last_name
+    # iterate over the cursor
+    employee_documentation_html = """
+
+          <th scope="row">{{ emp_id }}</th>
+          <td data-title="Name">{{emp_name}}</td>
+          <td data-title="Gender">{{gender}}</td>
+          <td data-title="Age">{{ age }}</td>
+          <td data-title="Department">{{ department }}</td>
+          <td data-title="Salary" data-type="currency"> {{ salary }}</td>
+          <td data-title="Email">{{ email }}</td>
+          <td data-title="Hire Date">{{ hire_date }}</td>
+          <td data-title="Resume"><button id="resumeButton" type="button">view</button></td>
+          <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
+
+    """
+    finally:
+        cursor.close()
+
+    # Not relevant to our design
+    return render_template('EmployeeDocumentation.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 @app.route("/overtime", methods=['GET', 'POST'])
 def overtime():
@@ -141,12 +181,14 @@ def search_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
 
 
-@app.route("/edit_profile_function", methods=['GET', 'POST'])
-def edit_profile_function():
-    return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
+# @app.route("/edit_profile_function", methods=['GET', 'POST'])
+# def edit_profile_function():
+#     import requests
+#
+#     return render_template('EditEmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, location=location, hire_date=hire_date)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
