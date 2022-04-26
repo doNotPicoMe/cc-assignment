@@ -73,14 +73,17 @@ def add_employee_function():
     department = request.form['department']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee (emp_id, first_name, last_name, age, gender, location, pri_skill, email, department, job, salary, hire_date)
+                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (emp_id, first_name, last_name, age, gender, location, pri_skill, email, department, job, salary, hire_date)
+
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-        cursor.execute(insert_sql,(emp_id,first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date))
+        cursor.execute(insert_sql)
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
