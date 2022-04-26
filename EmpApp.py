@@ -103,12 +103,15 @@ def add_employee_function():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-        return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
         except Exception as e:
             return str(e)
 
     finally:
         cursor.close()
+
+    # Not relevant to our design
+    return render_template('EmployeeProfile.html', name=emp_name,gender=gender,pri_skill=pri_skill, location=location)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
