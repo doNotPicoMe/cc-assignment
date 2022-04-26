@@ -84,14 +84,14 @@
         </tr>
         {% for item in data %}
         <tr>
-          <th scope="row">row[0]</th>
-          <td data-title="Name">" "+ row[1] + " " + row[2]</td>
-          <td data-title="Gender">row[4]</td>
-          <td data-title="Age">row[3]</td>
-          <td data-title="Department">row[8]</td>
-          <td data-title="Salary" data-type="currency">row[10]</td>
-          <td data-title="Email">row[7]</td>
-          <td data-title="Hire Date">row[11]</td>
+          <th scope="row">{{ row[0] }}</th>
+          <td data-title="Name">" "+ {{ row[1] }} + " " + {{ row[2] }}</td>
+          <td data-title="Gender">{{ row[4] }}</td>
+          <td data-title="Age">{{ row[3] }}</td>
+          <td data-title="Department">{{ row[8] }}</td>
+          <td data-title="Salary" data-type="currency">{{ row[10] }}</td>
+          <td data-title="Email">{{ row[7] }}</td>
+          <td data-title="Hire Date">{{ row[11] }}</td>
           <td data-title="Resume"><button id="resumeButton" type="button">view</button></td>
           <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
         </tr>
