@@ -62,7 +62,7 @@
         <div class="card__content">
           <div class="card__title">Overtime payment</div>
           <p class="card__text">Overtime is the amount of time someone works beyond normal working hours.</p>
-          <button class="btn btn--block card__btn" onclick="location.href='Overtime.html'">Add</button>
+          <button class="btn btn--block card__btn" onclick="location.href='{{ url_for('overtime') }}'">Add</button>
         </div>
       </div>
     </li>
@@ -72,7 +72,7 @@
         <div class="card__content">
           <div class="card__title">Payroll Deduction</div>
           <p class="card__text">Amounts withheld from an employee's payroll check, and these amounts are withheld by their employer.</p>
-          <button class="btn btn--block card__btn" onclick="location.href='PayrollDeduction.html'">Add</button>
+          <button class="btn btn--block card__btn" onclick="location.href='{{ url_for('payroll_deduction') }}'">Add</button>
         </div>
       </div>
     </li>
