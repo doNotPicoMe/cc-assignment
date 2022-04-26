@@ -172,7 +172,7 @@ def edit_profile_function():
         cursor.close()
     return render_template('EditEmployeeProfile.html', emp_id=emp_id,first_name=first_name, last_name=last_name, age=age, gender=gender, location=location, pri_skill=pri_skill, email=email,department=department,job=job,salary=salary,hire_date=hire_date)
 
-@app.route("/update_employee_function", methods=['POST'])
+@app.route("/update_employee_function", methods=['GET', 'POST'])
 def update_employee_function():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
