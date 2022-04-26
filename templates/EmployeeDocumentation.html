@@ -70,18 +70,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">B1499</th>
-          <td data-title="Name">JEREMY PUN KHENG MING</td>
-          <td data-title="Gender">Male</td>
-          <td data-title="Age">21</td>
-          <td data-title="Department">Information Technology</td>
-          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
-          <td data-title="Email">b1499@student.firstcity.edu.my</td>
-          <td data-title="Hire Date">OCT 2020</td>
-          <td data-title="Resume"><button id="resumeButton" type="button">view</button></td>
-          <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
-        </tr>
         {% for item in data %}
         <tr>
           <th scope="row">{{ item[0] }}</th>
@@ -92,7 +80,7 @@
           <td data-title="Salary" data-type="currency">{{ item[10] }}</td>
           <td data-title="Email">{{ item[7] }}</td>
           <td data-title="Hire Date">{{ item[11] }}</td>
-          <td data-title="Resume"><button id="resumeButton" type="button">view</button></td>
+          <td data-title="Resume"><button id="resumeButton" type="button"  onclick="location.href='{% view_profile_function, emp_id={{item[0]}} %}'">view</button></td>
           <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
         </tr>
         {% endfor %}
