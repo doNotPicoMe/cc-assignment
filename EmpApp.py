@@ -116,7 +116,7 @@ def add_employee_function():
 def search_employee_function():
     emp_id = request.form['emp_id']
 
-    search_sql= "SELECT * FROM employee WHERE emp_id = (%s)"
+    search_sql= "SELECT emp_name,gender,pri_skill,location,hire_date FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
 
     try:
