@@ -83,7 +83,7 @@ def add_employee_function():
         return "Please select a file"
 
     try:
-        cursor.execute(insert_sql)
+        cursor.execute(insert_sql,val)
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
