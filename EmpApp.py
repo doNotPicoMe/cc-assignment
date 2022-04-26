@@ -121,15 +121,18 @@ def search_employee_function():
 
     try:
         cursor.execute(search_sql,(emp_id))
-        db_conn.commit()
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            first_name=first_name
+            last_name=last_name
+            gender=gender
+            pri_skill=pri_skill
+            location = location
+            hire_date = hire_date
+
     # iterate over the cursor
-    for (first_name,last_name,gender,pri_skill,location,hire_date) in cursor:
-        first_name = first_name
-        last_name = last_name
-        gender = gender
-        pri_skill = pri_skill
-        location = Location
-        hire_date = hire_date
 
     finally:
         cursor.close()
