@@ -188,15 +188,13 @@ def update_employee_function():
     department = request.form['department']
 
     emp_image_file = request.files['emp_image_file']
-
-    update_sql= "UPDATE employee SET first_name = first_name, last_name = last_name, age = age, gender = gender, location = location, pri_skill= pri_skill, email = email, department = department, job=job, salary =salary, hire_date = hire_date WHERE emp_id = emp_id"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-        cursor.execute(update_sql)
+        c.execute("UPDATE settings SET (first_name=?,last_name=?,age=?,gender=?,location=?,pri_skill=?, email=?, department=?, job=?, salary=?,hire_date=?) WHERE emp_id=?",(first_name, last_name, age, gender, location, gender, pri_skill,email,department,job,salary,hire_date, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -225,6 +223,28 @@ def update_employee_function():
 
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
+
+@app.route("/overtime_function", methods=['GET', 'POST'])
+def overtime_function():
+    return render_template('AddOvertime.html')
+
+@app.route("/add_overtime_function", methods=['GET', 'POST'])
+def add_overtime_function():
+
+    emp_id = request.form['emp_id']
+    salary_sql= "SELECT CONVERT (INT, 'salary') AS salary FROM employee WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(salary_sql,(emp_id))
+    salaryInt = row[0] - 50
+
+    payroll_sql= "UPDATE employee SET payroll=(%s) WHERE emp_id = (%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(salary_sql,(salaryInt,emp_id))
+    salary= row[0]
+
+
+    data = cursor.fetchall()
+    return render_template('AddOvertime.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
