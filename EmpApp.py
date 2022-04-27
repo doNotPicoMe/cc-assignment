@@ -307,34 +307,33 @@ def payroll_deduction():
 
 @app.route("/add_payroll_deduction", methods=['GET', 'POST'])
 def add_payroll_deduction():
+    emp_id= request.form['emp_id']
+    deduct_id= "DE"+emp_id
+    salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(salary_sql,(emp_id))
+    records = cursor.fetchall()
+    for row in records:
+        salary = row[0]
 
-emp_id= request.form['emp_id']
-deduct_id= "DE"+emp_id
-salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
-cursor = db_conn.cursor()
-cursor.execute(salary_sql,(emp_id))
-records = cursor.fetchall()
-for row in records:
-    salary = row[0]
+    payrollDeductValue= request.form['payroll_deduct_value']
+    salaryInt= int(salary)
+    payrollDeductValueInt= int(payroll_deduct_value)
+    payroll = salaryInt - payrollDeductValueInt
+    payrollString = str(payroll)
 
-payrollDeductValue= request.form['payroll_deduct_value']
-salaryInt= int(salary)
-payrollDeductValueInt= int(payroll_deduct_value)
-payroll = salaryInt - payrollDeductValueInt
-payrollString = str(payroll)
+    add_overtime_sql="INSERT into deduct_payroll VALUES (%s,%s,%s)"
+    cursor.execute(add_overtime_sql,(deduct_id,payroll,emp_id))
+    db_conn.commit()
 
-add_overtime_sql="INSERT into deduct_payroll VALUES (%s,%s,%s)"
-cursor.execute(add_overtime_sql,(deduct_id,payroll,emp_id))
-db_conn.commit()
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT e.*,d.* FROM employee e, deduct_payroll d WHERE e.emp_id=o.emp_id")
+    data = cursor.fetchall()
 
-cursor = db_conn.cursor()
-cursor.execute("SELECT e.*,d.* FROM employee e, deduct_payroll d WHERE e.emp_id=o.emp_id")
-data = cursor.fetchall()
-
-if data == None:
-    return render_template('PayrollDeduction.html')
-else:
-    return render_template('PayrollDeduction.html', data=data)
+    if data == None:
+        return render_template('PayrollDeduction.html')
+    else:
+        return render_template('PayrollDeduction.html', data=data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
