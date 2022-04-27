@@ -59,22 +59,24 @@
         <tr>
           <th scope="col">Work ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Job</th>
           <th scope="col">Department</th>
           <th scope="col">Salary (RM)</th>
-          <th scope="col">Overtime Salary(RM)</th>
-          <th scope="col">Add Overtime</th>
+          <th scope="col">Overtime Payroll(RM)</th>
+          <th scope="col">View Profile</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">B1499</th>
-          <td data-title="Name">JEREMY PUN KHENG MING</td>
-          <td data-title="Job">CTO</td>
-          <td data-title="Department">Information Technology</td>
-          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
-          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
+          <th scope="row"></th>
+          <td data-title="Name"></td>
+          <td data-title="Job"></td>
+          <td data-title="Department"></td>
+          <td data-title="Salary" data-type="currency"></td>
+          <td data-title="Salary" data-type="currency"></td>
           <form action="/overtime_function" autocomplete="on" method="POST">
-          <td data-title="Edit Profile"><button id="editButton" type="button">Edit</button></td>
+          <td data-title="Edit Profile"><button id="viewButton" type="button">View</button></td>
           </form>
           <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
         </tr>
@@ -87,24 +89,21 @@
           <td data-title="Job">{{ item[3] }}</td>
           <td data-title="Department">{{ item[4] }}</td>
           <td data-title="Salary" data-type="currency">{{ item[5] }}</td>
-          <td data-title="Payroll" data-type="currency">{{ item[6] }}</td>
-          <form action="/overtime_function" autocomplete="on" method="POST">
+          <td data-title="Payroll" data-type="currency">{{ item[7] }}</td>
+          <form action="/search_employee_function" autocomplete="on" method="POST">
             <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
           </form>
-          <form action="/edit_profile_function" autocomplete="on" method="POST">
-            <td data-title="Edit Profile"><button id="editButton" type="submit"  name="emp_id"value="{{ item[0] }}">edit</button></td>
+          <form action="/delete_overtime_function" autocomplete="on" method="POST">
+            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="overtime_id" value="{{ item[6] }}">edit</button></td>
           </form>
         </tr>
         {% endfor %}
       </tbody>
 
-
-
-
       <tfoot>
         <tr>
-          <form action="/overtime_function" autocomplete="on" method="POST">
-            <td data-title="Delete"><button id="addOvertimeButton" type="submit">Add Overtime</button></td>
+          <form action="/add_overtime" autocomplete="on" method="POST">
+            <td data-title="Delete"><button id="addOvertimeButton" type="submit" name="emp_id" value="{{ item[0] }}">Add Overtime</button></td>
           </form>
         </tr>
         <tr>
@@ -116,14 +115,13 @@
   <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
   <script>
   //get a reference to the element
-  var resume = document.getElementById('resumeButton');
-  var edit = document.getElementById('editButton');
+  var deleteButton = document.getElementById('deleteButton');
 
   //add event listener
-  resume.addEventListener('click', function(event) {
+  deleteButton.addEventListener('click', function(event) {
     swal({
       title: "Are you sure?",
-      text: "You will not be able to recover this imaginary file!",
+      text: "You will not be able to recover this data!",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
@@ -134,18 +132,6 @@
     },
     .then(() => {
       dispatch(redirect('/'));
-    });
-  });
-  edit.addEventListener('click', function(event) {
-    swal({
-      title: 'Employee was successfully added!',
-      type: 'success',
-    }).then(() => {
-      if (result.value) {
-        // handle Confirm button click
-      } else {
-        // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-      }
     });
   });
   </script>
