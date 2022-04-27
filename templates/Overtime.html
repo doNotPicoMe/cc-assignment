@@ -62,6 +62,7 @@
           <th scope="col">Job</th>
           <th scope="col">Department</th>
           <th scope="col">Salary (RM)</th>
+          <th scope="col">Overtime Hours</th>
           <th scope="col">Overtime Payroll(RM)</th>
           <th scope="col">View Profile</th>
           <th scope="col">Delete</th>
@@ -73,14 +74,15 @@
           <th scope="row">{{ item[0] }}</th>
           <td data-title="Name">{{ item[1] }} {{ item[2] }}</td>
           <td data-title="Job">{{ item[3] }}</td>
-          <td data-title="Department">{{ item[4] }}</td>
-          <td data-title="Salary" data-type="currency">{{ item[5] }}</td>
-          <td data-title="Payroll" data-type="currency">{{ item[7] }}</td>
+          <td data-title="Department">{{ item[9] }}</td>
+          <td data-title="Salary" data-type="currency">{{ item[11] }}</td>
+          <td data-title="Overtime hours">{{ item[14] }}</td>
+          <td data-title="Payroll" data-type="currency">{{ item[15] }}</td>
           <form action="/search_employee_function" autocomplete="on" method="POST">
             <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
           </form>
           <form action="/delete_overtime_function" autocomplete="on" method="POST">
-            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="overtime_id" value="{{ item[6] }}">edit</button></td>
+            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="overtime_id" value="{{ item[13] }}">edit</button></td>
           </form>
         </tr>
         {% endfor %}
