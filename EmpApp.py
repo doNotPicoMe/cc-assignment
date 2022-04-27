@@ -313,6 +313,7 @@ def add_payroll_deduction():
 @app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
 def add_payroll_deduction_function():
     emp_id= request.form['emp_id']
+    late_hours= request.form['late_hours']
     payroll_id= "OT"+emp_id
     salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
@@ -322,7 +323,6 @@ def add_payroll_deduction_function():
         salary = row[0]
 
     overtime_hours="0"
-    late_hours= request.form['late_hours']
     salaryInt= int(salary)
     lateHoursInt= int(late_hours)
     # For every hour of OT, salary is increased by 100
