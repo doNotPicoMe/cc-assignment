@@ -264,10 +264,11 @@ def add_overtime_function():
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
     for row in records:
-        salaryInt = row[0]
+        salary = row[0]
 
     overtime_hours= request.form['overtime_hours']
-    overtimeHoursInt= int(overtime_hours)
+    salaryInt= int(overtime_hours)
+    overtimeHoursInt= int(salaryInt)
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt + (overtime_hours*100)
 
