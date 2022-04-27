@@ -9,7 +9,7 @@
   <!-- NAVBAR > icon -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.2/iconfont/material-icons.min.css'>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='NavBarStyle.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='AddEmpStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='FormStyle.css') }}">
 </head>
 <header class="header">
 	<nav class="navbar">
@@ -54,10 +54,13 @@
 <body>
   <div class="login-page">
     <div class="animated slideInUp form">
-    <center><img style="height:110px; width:auto; margin-top:10px;" src="../static/fcuc_logo.png" alt="fcuc_logo"></center></br></br>
-      <form class="login-form" action="/add_overtime_function" autocomplete="on" method="POST">
-        <button id="overtimeButton" type="submit" name="overtime">Add Overtime</button>
+    <center><img style="height:110px; width:auto;" src="../static/fcuc_logo.png" alt="fcuc_logo"></center></br></br>
+      <form class="login-form" action="/add_overtime_function" autocomplete="on" method = "POST" enctype="multipart/form-data">
+        <input type="text" name="emp_id" placeholder="Employee ID"/>
+        <input type="text" name="overtime_hours" placeholder="Number of overtime hours"/>
+        <button type="submit" id="overtimeButton">Add Overtime Pay</button>
       </form>
+    </form>
     </div>
   </div>
   <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
