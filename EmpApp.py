@@ -267,10 +267,10 @@ def add_overtime_function():
         salary = row[0]
 
     overtime_hours= request.form['overtime_hours']
-    salaryInt= int(overtime_hours)
-    overtimeHoursInt= int(salaryInt)
+    salaryInt= int(salary)
+    overtimeHoursInt= int(overtime_hours)
     # For every hour of OT, salary is increased by 100
-    payroll = salaryInt + (overtime_hours*100)
+    payroll = salaryInt + (overtimeHoursInt*100)
 
     add_overtime_sql=" INSERT into overtime VALUES (%s,%s,%s)"
     cursor.execute(add_overtime_sql,(overtime_hours, payroll, emp_id))
