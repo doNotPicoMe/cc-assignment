@@ -86,6 +86,9 @@
           <form action="/edit_profile_function" autocomplete="on" method="POST">
             <td data-title="Edit Profile"><button id="editButton" type="submit"  name="emp_id"value="{{ item[0] }}">edit</button></td>
           </form>
+          <form action="/delete_profile_function" autocomplete="on" method="POST">
+            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="emp_id" value="{{ item[0] }}">delete</button></td>
+          </form>
         </tr>
         {% endfor %}
       </tbody>
