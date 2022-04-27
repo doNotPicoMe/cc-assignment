@@ -233,19 +233,17 @@ def overtime_function():
 @app.route("/add_overtime_function", methods=['GET', 'POST'])
 def add_overtime_function():
 
-    emp_id = request.form['emp_id']
-    salary_sql= "SELECT CONVERT (INT, 'salary') AS salary FROM employee WHERE emp_id = (%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(salary_sql,(emp_id))
-    salaryInt = row[0] - 50
-
-    payroll_sql= "UPDATE employee SET payroll=(%s) WHERE emp_id = (%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(salary_sql,(salaryInt,emp_id))
-    salary= row[0]
-
-
-    data = cursor.fetchall()
+    # emp_id = request.form['emp_id']
+    # salary_sql= "SELECT CONVERT (INT, 'salary') AS salary FROM employee WHERE emp_id = (%s)"
+    # cursor = db_conn.cursor()
+    # cursor.execute(salary_sql,(emp_id))
+    # salaryInt = row[0] - 50
+    #
+    # payroll_sql= "UPDATE employee SET payroll=(%s) WHERE emp_id = (%s)"
+    # cursor = db_conn.cursor()
+    # cursor.execute(salary_sql,(salaryInt,emp_id))
+    # salary= row[0]
+    # data = cursor.fetchall()
     return render_template('AddOvertime.html')
 
 if __name__ == '__main__':
