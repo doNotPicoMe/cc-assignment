@@ -110,6 +110,22 @@ def add_employee_function():
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
+@app.route("/delete_employee_function", methods=['GET', 'POST'])
+def employee_documentation():
+    emp_id = request.form['emp_id']
+    delete_employee_sql = "DELETE FROM employee where emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(delete_employee_sql,(emp_id))
+    db_conn.commit()
+
+    cursor.execute("SELECT * FROM employee")
+    data = cursor.fetchall()
+
+    if data == None:
+        return render_template('EmployeeDocumentation.html')
+    else:
+        return render_template('EmployeeDocumentation.html', data=data)
+
 @app.route("/search_employee_function", methods=['POST'])
 def search_employee_function():
     emp_id = request.form['emp_id']
