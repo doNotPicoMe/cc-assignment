@@ -245,7 +245,8 @@ def delete_overtime_function():
     cursor = db_conn.cursor()
     cursor.execute(delete_overtime_sql,(overtime_id))
     db_conn.commit()
-    cursor.execute("SELECT e.*,o.* FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    overtime_sql="SELECT e.emp_id,e.first_name,e.last_name,e.job,e.department,e.salary,o.overtime_id,o.payroll FROM employee e, overtime o WHERE e.emp_id=o.emp_id"
+    cursor.execute(overtime_sql)
     data = cursor.fetchall()
 
     if data == None:
