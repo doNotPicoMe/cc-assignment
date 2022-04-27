@@ -234,7 +234,7 @@ def overtime():
         return render_template('Overtime.html', data=data)
 
 @app.route("/add_overtime", methods=['GET', 'POST'])
-def home():
+def add_overtime():
     return render_template('AddOvertime.html')
 
 @app.route("/delete_overtime_function", methods=['GET', 'POST'])
