@@ -259,7 +259,7 @@ def add_overtime_function():
     emp_id= request.form['emp_id']
     # SELECT CAST(salary AS UNSIGNED INTEGER) FROM employee where emp_id="B1104"
     # salary_sql="SELECT CONVERT (INT,'salary') FROM employee WHERE emp_id=(%s)"
-    salary_sql="SELECT CAST (salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
+    salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     salaryInt = row[0]
