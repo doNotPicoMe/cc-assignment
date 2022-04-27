@@ -68,20 +68,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"></th>
-          <td data-title="Name"></td>
-          <td data-title="Job"></td>
-          <td data-title="Department"></td>
-          <td data-title="Salary" data-type="currency"></td>
-          <td data-title="Salary" data-type="currency"></td>
-          <form action="/overtime_function" autocomplete="on" method="POST">
-          <td data-title="Edit Profile"><button id="viewButton" type="button">View</button></td>
-          </form>
-          <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
-        </tr>
-      </tbody>
-      <tbody>
         {% for item in data %}
         <tr>
           <th scope="row">{{ item[0] }}</th>
