@@ -307,11 +307,11 @@ def payroll_deduction():
         return render_template('PayrollDeduction.html', data=data)
 
 @app.route("/add_payroll_deduction", methods=['GET', 'POST'])
-def payroll_deduction():
+def add_payroll_deduction():
     return render_template('AddPayrollDeduction.html')
 
 @app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
-def add_payroll_deduction():
+def add_payroll_deduction_function():
     emp_id= request.form['emp_id']
     deduct_id= "DE"+emp_id
     salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
