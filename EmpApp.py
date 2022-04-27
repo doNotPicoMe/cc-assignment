@@ -44,10 +44,6 @@ def employee_documentation():
     data = cursor.fetchall()
     return render_template('EmployeeDocumentation.html', data=data)
 
-@app.route("/overtime", methods=['GET', 'POST'])
-def overtime():
-    return render_template('Overtime.html')
-
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
     return render_template('Payroll.html')
@@ -225,6 +221,16 @@ def update_employee_function():
 
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
+
+@app.route("/overtime", methods=['GET', 'POST'])
+def overtime():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT e.emp_id,e.first_name,e.last_name,e.job,e.department,e.salary,o.payroll FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    data = cursor.fetchall()
+    if rowCount == 0:
+        return render_template('Overtime.html')
+    else:
+        return render_template('Overtime.html', data=data)
 
 @app.route("/overtime_function", methods=['GET', 'POST'])
 def overtime_function():
