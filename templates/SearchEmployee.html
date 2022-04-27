@@ -56,7 +56,7 @@
   <div class="animated slideInUp form">
     <!-- <center><img style="height:110px;width:auto"src="{{ url_for('static',filename='fcuc_logo.png') }}" alt="fcuc_logo"></center></br></br> -->
     <center><img style="height:110px; width:auto;" src="../static/fcuc_logo.png" alt="fcuc_logo"></center></br></br>
-    <form class="login-form" action="/add_employee_function" autocomplete="on" method = "POST" enctype="multipart/form-data">
+    <form class="register-form" action="/add_employee_function" autocomplete="on" method = "POST" enctype="multipart/form-data">
       <input type="text" name="emp_id" placeholder="Employee ID"/>
       <input type="text" name="first_name" placeholder="First Name"/>
       <input type="text" name="last_name" placeholder="Last Name"/>
@@ -74,7 +74,7 @@
       <button type="submit" id="registerButton">Register Employee</button>
       <p class="message">Looking for someone? <a href="#">Click Here</a></p>
     </form>
-    <form class="register-form" action="/search_employee_function" autocomplete="on" method="POST">
+    <form class="login-form" action="/search_employee_function" autocomplete="on" method="POST">
       <input type="text"  name="emp_id" placeholder="Employee ID"/>
       <button type="submit" id="fetchButton">Fetch Info</button>
       <p class="message">Want to add an employee? <a href="#">Click Here</a></p>
