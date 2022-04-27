@@ -253,7 +253,7 @@ def delete_overtime_function():
     cursor = db_conn.cursor()
     cursor.execute(delete_overtime_sql,(overtime_id))
     db_conn.commit()
-    cursor.execute("SELECT e.*,o.* FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
     if data == None:
@@ -264,26 +264,26 @@ def delete_overtime_function():
 @app.route("/add_overtime_function", methods=['GET', 'POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
-    overtime_id= "OT"+emp_id
+    payroll_id= "OT"+emp_id
     salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
     for row in records:
         salary = row[0]
-
+    late_hours="0"
     overtime_hours= request.form['overtime_hours']
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt + (overtimeHoursInt*100)
     payrollString = str(payroll)
-    add_overtime_sql="INSERT into overtime VALUES (%s,%s,%s,%s)"
-    cursor.execute(add_overtime_sql,(overtime_id,overtime_hours, payrollString, emp_id))
+    add_overtime_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
+    cursor.execute(add_overtime_sql,(payroll_id,late_hours,overtime_hours, payrollString, emp_id))
     db_conn.commit()
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT e.*,o.* FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
     if data == None:
@@ -313,7 +313,7 @@ def add_payroll_deduction():
 @app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
 def add_payroll_deduction_function():
     emp_id= request.form['emp_id']
-    deduct_id= "DE"+emp_id
+    payroll_id= "OT"+emp_id
     salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
@@ -321,18 +321,19 @@ def add_payroll_deduction_function():
     for row in records:
         salary = row[0]
 
-    payrollDeductValue= request.form['payroll_deduct_value']
+    overtime_hours="0"
+    late_hours= request.form['late_hours']
     salaryInt= int(salary)
-    payrollDeductValueInt= int(payroll_deduct_value)
-    payroll = salaryInt - payrollDeductValueInt
+    lateHoursInt= int(late_hours)
+    # For every hour of OT, salary is increased by 100
+    payroll = salaryInt - (lateHoursInt*10)
     payrollString = str(payroll)
-
-    add_overtime_sql="INSERT into deduct_payroll VALUES (%s,%s,%s)"
-    cursor.execute(add_overtime_sql,(deduct_id,payroll,emp_id))
+    deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
+    cursor.execute(deduct_payroll_sql,(payroll_id,late_hours,overtime_hours,payrollString, emp_id))
     db_conn.commit()
 
     cursor = db_conn.cursor()
-    cursor.execute("SELECT e.*,d.* FROM employee e, deduct_payroll d WHERE e.emp_id=o.emp_id")
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
     if data == None:
