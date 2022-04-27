@@ -249,7 +249,7 @@ def add_overtime():
 def delete_overtime_function():
     overtime_id = request.form['overtime_id']
 
-    delete_overtime_sql= "DELETE FROM overtime WHERE overtime_id=(%s)"
+    delete_overtime_sql= "DELETE FROM payroll WHERE payroll_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(delete_overtime_sql,(overtime_id))
     db_conn.commit()
