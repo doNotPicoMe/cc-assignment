@@ -189,7 +189,7 @@ def update_employee_function():
 
     emp_image_file = request.files['emp_image_file']
     # update_sql= 'UPDATE employee SET first_name = "first_name", last_name = "last_name", age = "age", gender = "gender", location = "location", pri_skill= "pri_skill", email = "email", department = "department", job="job", salary ="salary", hire_date = "hire_date" WHERE emp_id = "emp_id"'
-    update_sql= "UPDATE employee SET first_name = first_name, last_name = last_name, age = age, gender = gender, location = location, pri_skill= pri_skill, email = email, department = department, job=job, salary =salary, hire_date = hire_date WHERE emp_id = emp_id"
+    update_sql= "UPDATE employee SET first_name = first_name, last_name = last_name, age = age, gender = gender, location = location, pri_skill= pri_skill, email = email, department = department, job=job, salary =salary, hire_date = hire_date WHERE emp_id = 'emp_id'"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -197,7 +197,7 @@ def update_employee_function():
 
     try:
         cursor.execute(update_sql)
-        db_conn.autocommit(True)
+        db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
