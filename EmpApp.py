@@ -227,7 +227,11 @@ def overtime():
     cursor = db_conn.cursor()
     cursor.execute("SELECT e.emp_id,e.first_name,e.last_name,e.job,e.department,e.salary,o.payroll FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
     data = cursor.fetchall()
-    return render_template('Overtime.html', data=data)
+
+    if data = None:
+        return render_template('Overtime.html')
+    else:
+        return render_template('Overtime.html', data=data)
 
 @app.route("/overtime_function", methods=['GET', 'POST'])
 def overtime_function():
