@@ -297,6 +297,7 @@ def payroll():
 
 @app.route("/payroll_deduction", methods=['GET', 'POST'])
 def payroll_deduction():
+    cursor = db_conn.cursor()
     cursor.execute("SELECT e.*,d.* FROM employee e, deduct_payroll d WHERE e.emp_id=d.emp_id")
     data = cursor.fetchall()
 
