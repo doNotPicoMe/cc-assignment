@@ -194,7 +194,7 @@ def update_employee_function():
         return "Please select a file"
 
     try:
-        c.execute("UPDATE settings SET (first_name=?,last_name=?,age=?,gender=?,location=?,pri_skill=?, email=?, department=?, job=?, salary=?,hire_date=?) WHERE emp_id=?",(first_name, last_name, age, gender, location, gender, pri_skill,email,department,job,salary,hire_date, emp_id))
+        cursor.execute("UPDATE settings SET (first_name=?,last_name=?,age=?,gender=?,location=?,pri_skill=?, email=?, department=?, job=?, salary=?,hire_date=?) WHERE emp_id=?",(first_name, last_name, age, gender, location, gender, pri_skill,email,department,job,salary,hire_date, emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
