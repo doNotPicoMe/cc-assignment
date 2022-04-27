@@ -73,14 +73,17 @@
           <td data-title="Department">Information Technology</td>
           <td data-title="Salary" data-type="currency">$1,657,870,986</td>
           <td data-title="Salary" data-type="currency">$1,657,870,986</td>
+          <form action="/overtime_function" autocomplete="on" method="POST">
           <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
+          </form>
           <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <!-- <td colspan="6"> -->
-          <td data-title="Delete"><button id="addOvertimeButton" type="button"  onclick="location.href='AddOvertime.html'">Add Overtime</button></td>
+          <form action="/overtime_function" autocomplete="on" method="POST">
+            <td data-title="Delete"><button id="addOvertimeButton" type="submit">Add Overtime</button></td>
+          </form>
         </tr>
         <tr>
           <td colspan="7">Data is current as of March 31, 2021.</td>
