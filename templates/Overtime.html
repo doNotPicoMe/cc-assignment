@@ -62,23 +62,45 @@
           <th scope="col">Department</th>
           <th scope="col">Salary (RM)</th>
           <th scope="col">Overtime Salary(RM)</th>
-          <th scope="col">Edit payment</th>
-          <th scope="col">Delete</th>
+          <th scope="col">Add Overtime</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">B1499</th>
           <td data-title="Name">JEREMY PUN KHENG MING</td>
+          <td data-title="Job">CTO</td>
           <td data-title="Department">Information Technology</td>
           <td data-title="Salary" data-type="currency">$1,657,870,986</td>
           <td data-title="Salary" data-type="currency">$1,657,870,986</td>
           <form action="/overtime_function" autocomplete="on" method="POST">
-          <td data-title="Edit Profile"><button id="editButton" type="button">edit</button></td>
+          <td data-title="Edit Profile"><button id="editButton" type="button">Edit</button></td>
           </form>
           <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
         </tr>
       </tbody>
+      <tbody>
+        {% for item in data %}
+        <tr>
+          <th scope="row">{{ item[0] }}</th>
+          <td data-title="Name">{{ item[1] }} {{ item[2] }}</td>
+          <td data-title="Job">{{ item[3] }}</td>
+          <td data-title="Department">{{ item[4] }}</td>
+          <td data-title="Salary" data-type="currency">{{ item[5] }}</td>
+          <td data-title="Payroll" data-type="currency">{{ item[6] }}</td>
+          <form action="/overtime_function" autocomplete="on" method="POST">
+            <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
+          </form>
+          <form action="/edit_profile_function" autocomplete="on" method="POST">
+            <td data-title="Edit Profile"><button id="editButton" type="submit"  name="emp_id"value="{{ item[0] }}">edit</button></td>
+          </form>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+
+
+
       <tfoot>
         <tr>
           <form action="/overtime_function" autocomplete="on" method="POST">
