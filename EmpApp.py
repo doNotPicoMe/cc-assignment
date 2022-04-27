@@ -197,7 +197,7 @@ def update_employee_function():
 
     try:
         cursor.execute(update_sql)
-        db_conn.commit()
+        db_conn.autocommit(True)
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
