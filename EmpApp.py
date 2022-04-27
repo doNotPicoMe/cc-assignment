@@ -258,8 +258,6 @@ def delete_overtime_function():
 def add_overtime_function():
     emp_id= request.form['emp_id']
     overtime_id= "OT"+emp_id
-    # SELECT CAST(salary AS UNSIGNED INTEGER) FROM employee where emp_id="B1104"
-    # salary_sql="SELECT CONVERT (INT,'salary') FROM employee WHERE emp_id=(%s)"
     salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
@@ -276,7 +274,17 @@ def add_overtime_function():
     add_overtime_sql="INSERT into overtime VALUES (%s,%s,%s,%s)"
     cursor.execute(add_overtime_sql,(overtime_id,overtime_hours, payrollString, emp_id))
     db_conn.commit()
-    cursor.close()
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT e.*,o.* FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    data = cursor.fetchall()
+
+    if data == None:
+        return render_template('Overtime.html')
+    else:
+        return render_template('Overtime.html', data=data)
+
+
     return render_template('Overtime.html')
 
 if __name__ == '__main__':
