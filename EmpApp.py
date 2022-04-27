@@ -225,7 +225,7 @@ def update_employee_function():
 @app.route("/overtime", methods=['GET', 'POST'])
 def overtime():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT e.emp_id,e.first_name,e.last_name,e.job,e.department,e.salary,o.overtime_id,o.payroll FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
+    cursor.execute("SELECT e.*,o.* FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
     data = cursor.fetchall()
 
     if data == None:
@@ -283,9 +283,6 @@ def add_overtime_function():
         return render_template('Overtime.html')
     else:
         return render_template('Overtime.html', data=data)
-
-
-    return render_template('Overtime.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
