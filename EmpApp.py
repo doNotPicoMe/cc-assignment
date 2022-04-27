@@ -322,14 +322,14 @@ def add_payroll_deduction_function():
     for row in records:
         salary = row[0]
 
-    overtime_hours="0"
+    overtimeHours="0"
     salaryInt= int(salary)
-    lateHoursInt= int(late_hours)
+    overtimeHoursInt= int(overtime_hours)
     # For every hour of OT, salary is increased by 100
-    payroll = salaryInt - (lateHoursInt*10)
+    payroll = salaryInt - (overtimeHoursInt*10)
     payrollString = str(payroll)
     deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
-    cursor.execute(deduct_payroll_sql,(payroll_id,late_hours,overtime_hours,payrollString, emp_id))
+    cursor.execute(deduct_payroll_sql,(payroll_id,overtime_hours,overtimeHours,payrollString, emp_id))
     db_conn.commit()
 
     cursor = db_conn.cursor()
