@@ -111,7 +111,7 @@ def add_employee_function():
     return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
 @app.route("/delete_employee_function", methods=['GET', 'POST'])
-def employee_documentation():
+def delete_employee_function():
     emp_id = request.form['emp_id']
     delete_employee_sql = "DELETE FROM employee where emp_id=(%s)"
     cursor = db_conn.cursor()
