@@ -59,31 +59,36 @@
         <tr>
           <th scope="col">Work ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Job</th>
           <th scope="col">Department</th>
           <th scope="col">Salary (RM)</th>
-          <th scope="col">Deducted Salary (RM)</th>
-          <th scope="col">Reason</th>
-          <th scope="col">Edit deduction</th>
+          <th scope="col">Deducted Payroll(RM)</th>
+          <th scope="col">View Profile</th>
           <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
+        {% for item in data %}
         <tr>
-          <th scope="row">B1499</th>
-          <td data-title="Name">JEREMY PUN KHENG MING</td>
-          <td data-title="Department">Information Technology</td>
-          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
-          <td data-title="Salary" data-type="currency">$1,657,870,986</td>
-          <td data-title="Hire Date">Late for work</td>
-          <td data-title="Edit Deduction"><button id="editButton" type="button" onclick="location.href='EditPayroll.html'">Edit</button></td>
-          <td data-title="Delete"><button id="deleteButton" type="button">Delete</button></td>
+          <th scope="row">{{ item[0] }}</th>
+          <td data-title="Name">{{ item[1] }} {{ item[2] }}</td>
+          <td data-title="Job">{{ item[9] }}</td>
+          <td data-title="Department">{{ item[8] }}</td>
+          <td data-title="Salary" data-type="currency">{{ item[10] }}</td>
+          <td data-title="Payroll" data-type="currency">{{ item[14] }}</td>
+          <form action="/search_employee_function" autocomplete="on" method="POST">
+            <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
+          </form>
+          <form action="/delete_overtime_function" autocomplete="on" method="POST">
+            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="overtime_id" value="{{ item[12] }}">delete</button></td>
+          </form>
         </tr>
+        {% endfor %}
       </tbody>
       <tfoot>
-        <tr>
-          <!-- <td colspan="6"> -->
-          <td data-title="Delete"><button id="addPayrollDeductionButton" type="button" onclick="location.href='AddPayrollDeduction.html'">Add Deduction</button></td>
-        </tr>
+        <form action="/add_payroll_deduction" autocomplete="on" method="POST">
+          <td data-title="Delete"><button id="addDeductionButton" type="submit">Add Deduction</button></td>
+        </form>
         <tr>
           <td colspan="7">Data is current as of March 31, 2021.</td>
         </tr>
@@ -92,43 +97,6 @@
   </div>
   <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
   <script>
-  // //get a reference to the element
-  // var editButton = document.getElementById('editButton');
-  // var deleteButton = document.getElementById('deleteButton');
-  //
-  // //add event listener
-  // editButton.addEventListener('click', function(event) {
-  //   swal({
-  //     title: "Are you sure?",
-  //     text: "You will not be able to recover this imaginary file!",
-  //     type: "warning",
-  //     showCancelButton: true,
-  //     showConfirmButton: true,
-  //     confirmButtonColor: '#DD6B55',
-  //     confirmButtonText: 'Yes, I am sure!',
-  //     cancelButtonText: "No, cancel it!",
-  //   })
-  //   .then((result) => {
-  //     if(result){
-  //       window.location = "Overtime.html";
-  //     }
-  //     else{
-  //       window.location = "PayrollDeduction.html";
-  //     }
-  //   });
-  // });
-  // deleteButton.addEventListener('click', function(event) {
-  //   swal({
-  //     title: 'Employee was successfully added!',
-  //     type: 'success',
-  //   }).then(() => {
-  //     if (result.value) {
-  //       // handle Confirm button click
-  //     } else {
-  //       // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-  //     }
-  //   });
-  // });
   </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
