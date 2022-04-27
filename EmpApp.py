@@ -228,7 +228,7 @@ def overtime():
     cursor.execute("SELECT e.emp_id,e.first_name,e.last_name,e.job,e.department,e.salary,o.payroll FROM employee e, overtime o WHERE e.emp_id=o.emp_id")
     data = cursor.fetchall()
 
-    if data = None:
+    if data == None:
         return render_template('Overtime.html')
     else:
         return render_template('Overtime.html', data=data)
