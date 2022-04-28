@@ -36,7 +36,7 @@ def search_employee():
 @app.route("/my_profile", methods=['GET', 'POST'])
 def my_profile():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM employee WHERE job='admin'")
+    cursor.execute("SELECT * FROM employee WHERE job='Admin'")
     data = cursor.fetchall()
     return render_template('MyProfile.html',data=data)
 
