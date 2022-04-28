@@ -236,6 +236,56 @@ def update_employee_function():
     # Not relevant to our design
     return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
+@app.route("/payroll", methods=['GET', 'POST'])
+def payroll():
+    return render_template('Payroll.html')
+
+@app.route("/payroll_deduction", methods=['GET', 'POST'])
+def payroll_deduction():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
+    data = cursor.fetchall()
+
+    if data == None:
+        return render_template('PayrollDeduction.html')
+    else:
+        return render_template('PayrollDeduction.html', data=data)
+
+@app.route("/add_payroll_deduction", methods=['GET', 'POST'])
+def add_payroll_deduction():
+    return render_template('AddPayrollDeduction.html')
+
+@app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
+def add_payroll_deduction_function():
+    emp_id= request.form['emp_id']
+    late_hours= request.form['overtime_hours']
+    salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(salary_sql,(emp_id))
+    records = cursor.fetchall()
+    for row in records:
+        salary = row[0]
+
+    salaryInt= int(salary)
+    overtimeHoursInt= int(overtime_hours)
+    # For every hour of OT, salary is increased by 100
+    payroll = salaryInt - (overtimeHoursInt*10)
+    payrollString = str(payroll)
+    deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
+
+    deduct_payroll_sql="UPDATE payroll VALUES late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    cursor.execute(deduct_payroll_sql,(late_hours,payroll,emp_id))
+    db_conn.commit()
+
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
+    data = cursor.fetchall()
+    if data == None:
+        return render_template('PayrollDeduction.html')
+    else:
+        return render_template('PayrollDeduction.html', data=data)
+
+
 @app.route("/overtime", methods=['GET', 'POST'])
 def overtime():
     cursor = db_conn.cursor()
@@ -307,58 +357,6 @@ def delete_overtime_function():
                 return render_template('Overtime.html')
             else:
                 return render_template('Overtime.html', data=data)
-
-
-
-@app.route("/payroll_deduction", methods=['GET', 'POST'])
-def payroll_deduction():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
-    data = cursor.fetchall()
-
-    if data == None:
-        return render_template('PayrollDeduction.html')
-    else:
-        return render_template('PayrollDeduction.html', data=data)
-
-@app.route("/payroll", methods=['GET', 'POST'])
-def payroll():
-    return render_template('Payroll.html')
-
-@app.route("/add_payroll_deduction", methods=['GET', 'POST'])
-def add_payroll_deduction():
-    return render_template('AddPayrollDeduction.html')
-
-@app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
-def add_payroll_deduction_function():
-    emp_id= request.form['emp_id']
-    late_hours= request.form['overtime_hours']
-    salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(salary_sql,(emp_id))
-    records = cursor.fetchall()
-    for row in records:
-        salary = row[0]
-
-    salaryInt= int(salary)
-    overtimeHoursInt= int(overtime_hours)
-    # For every hour of OT, salary is increased by 100
-    payroll = salaryInt - (overtimeHoursInt*10)
-    payrollString = str(payroll)
-    deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
-
-    deduct_payroll_sql="UPDATE payroll VALUES late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
-    cursor.execute(deduct_payroll_sql,(late_hours,payroll,emp_id))
-    db_conn.commit()
-
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
-    data = cursor.fetchall()
-    if data == None:
-        return render_template('PayrollDeduction.html')
-    else:
-        return render_template('PayrollDeduction.html', data=data)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
