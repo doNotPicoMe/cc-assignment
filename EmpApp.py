@@ -268,11 +268,11 @@ def delete_overtime_function():
         if emp_image_file.filename == "":
             return "Please select a file"
 
-    try:
-        cursor.execute(update_sql,(late_hours,salary,emp_id))
-        db_conn.commit()
-        cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
-        data = cursor.fetchall()
+        try:
+            cursor.execute(update_sql,(late_hours,salary,emp_id))
+            db_conn.commit()
+            cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
+            data = cursor.fetchall()
 
         if data == None:
             return render_template('Overtime.html')
