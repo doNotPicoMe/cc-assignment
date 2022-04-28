@@ -355,8 +355,8 @@ def delete_overtime_function():
                 return render_template('Overtime.html')
             else:
                 return render_template('Overtime.html', data=data)
-        finally:
-            cursor.close()
+    finally:
+        cursor.close()
 
 
 
