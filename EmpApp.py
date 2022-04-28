@@ -279,7 +279,7 @@ def delete_overtime_function():
             else:
                 return render_template('Overtime.html', data=data)
 
-@app.route("/add_overtime_function", methods=['GET', 'POST'])
+@app.route("/add_overtime_function",methods=['GET','POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
     salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
@@ -303,10 +303,10 @@ def add_overtime_function():
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
-        if data == None:
-            return render_template('Overtime.html')
-        else:
-            return render_template('Overtime.html', data=data)
+    if data == None:
+        return render_template('Overtime.html')
+    else:
+        return render_template('Overtime.html', data=data)
 
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
