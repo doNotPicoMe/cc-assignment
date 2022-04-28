@@ -78,7 +78,7 @@ def add_employee_function():
     try:
         cursor.execute(insert_sql,(emp_id,first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date))
         db_conn.commit()
-        cursor.execute(insert+payroll_sql,(payroll_id,late_hours,overtime_hours,emp_id))
+        cursor.execute(insert_payroll_sql,(payroll_id,late_hours,overtime_hours,emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
