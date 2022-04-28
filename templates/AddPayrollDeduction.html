@@ -62,34 +62,6 @@
     </form>
     </div>
   </div>
-  <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-  <script>
-  //get a reference to the element
-  var register = document.getElementById('registerButton');
-  var fetch = document.getElementById('fetchButton');
-
-  //add event listener
-  register.addEventListener('click', function(event) {
-    swal({
-      title: 'Employee was successfully added!',
-      type: 'success',
-    })
-    .then(() => {
-        dispatch(redirect('/'));
-    });
-  });
-  fetch.addEventListener('click', function(event) {
-    swal({
-        title: 'Searching...',
-        icon: 'success',
-        timer: 800,
-        showConfirmButton: false
-    })
-    .then(() => {
-        dispatch(redirect('/'));
-    });
-  });
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script  src="{{ url_for("static",filename='AddEmpScript.js') }}"></script>
 <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
