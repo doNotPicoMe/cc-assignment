@@ -63,16 +63,22 @@ def add_employee_function():
     job = request.form['job']
     department = request.form['department']
 
+    payroll_id= "OT"+emp_id
+    late_hours= "0"
+    overtime_hours= "0"
     emp_image_file = request.files['emp_image_file']
 
     insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
+    insert_payroll_sql= "INSERT into payroll VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-        cursor.execute(insert_sql,(emp_id,first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date,salary))
+        cursor.execute(insert_sql,(emp_id,first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date))
+        db_conn.commit()
+        cursor.execute(insert+payroll_sql,(payroll_id,late_hours,overtime_hours,emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -247,14 +253,28 @@ def add_overtime():
 
 @app.route("/delete_overtime_function", methods=['GET', 'POST'])
 def delete_overtime_function():
-    overtime_id = request.form['overtime_id']
-
-    delete_overtime_sql= "DELETE FROM payroll WHERE payroll_id=(%s)"
+    emp_id=request.form['emp_id']
+    late_hours="0
+    search_sql= "SELECT salary FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
-    cursor.execute(delete_overtime_sql,(overtime_id))
+    try:
+        cursor.execute(search_sql,(emp_id))
+        records = cursor.fetchall()
+        for row in records:
+            salary= row[0]
+
+    # update_sql= 'UPDATE employee SET first_name = "first_name", last_name = "last_name", age = "age", gender = "gender", location = "location", pri_skill= "pri_skill", email = "email", department = "department", job="job", salary ="salary", hire_date = "hire_date" WHERE emp_id = "emp_id"'
+    update_sql= "UPDATE payroll SET late_hours=(%s), salary=(%s), WHERE emp_id=(%s)"
     db_conn.commit()
-    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
-    data = cursor.fetchall()
+
+    if emp_image_file.filename == "":
+        return "Please select a file"
+
+    try:
+        cursor.execute(update_sql,(late_hours,salary,emp_id))
+        db_conn.commit()
+        cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
+        data = cursor.fetchall()
 
     if data == None:
         return render_template('Overtime.html')
@@ -264,25 +284,24 @@ def delete_overtime_function():
 @app.route("/add_overtime_function", methods=['GET', 'POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
-    payroll_id= "OT"+emp_id
-    salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
+
+    salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
     for row in records:
         salary = row[0]
-    late_hours="0"
     overtime_hours= request.form['overtime_hours']
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
+
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt + (overtimeHoursInt*100)
     payrollString = str(payroll)
-    add_overtime_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
-    cursor.execute(add_overtime_sql,(payroll_id,late_hours,overtime_hours, payrollString, emp_id))
+    add_overtime_sql="UPDATE payroll VALUES overtime_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    cursor.execute(add_overtime_sql,(overtime_hours, payrollString, emp_id))
     db_conn.commit()
 
-    cursor = db_conn.cursor()
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
@@ -313,33 +332,33 @@ def add_payroll_deduction():
 @app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
 def add_payroll_deduction_function():
     emp_id= request.form['emp_id']
-    overtime_hours= request.form['overtime_hours']
-    payroll_id= "OT"+emp_id
-    salary_sql="SELECT CAST(salary as UNSIGNED INTEGER) FROM employee WHERE emp_id=(%s)"
+    late_hours= request.form['overtime_hours']
+    salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
     for row in records:
         salary = row[0]
 
-    overtimeHours="0"
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt - (overtimeHoursInt*10)
     payrollString = str(payroll)
     deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
-    cursor.execute(deduct_payroll_sql,(payroll_id,overtime_hours,overtimeHours,payrollString, emp_id))
+
+    deduct_payroll_sql="UPDATE payroll VALUES late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    cursor.execute(deduct_payroll_sql,(late_hours,payroll,emp_id))
     db_conn.commit()
 
     cursor = db_conn.cursor()
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
-
     if data == None:
         return render_template('PayrollDeduction.html')
     else:
         return render_template('PayrollDeduction.html', data=data)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
