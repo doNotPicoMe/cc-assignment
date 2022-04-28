@@ -76,8 +76,7 @@
   </section>
   <span class="back">
   <form action="/edit_profile_function" autocomplete="on" method="POST">
-    <input type="hidden" name="emp_id" value= "{{ emp_id }}"/>
-		<button type="submit" id="back_text" name="emp_id">EDIT PROFILE</button>
+    <button id="back_text" type="submit"  name="emp_id"value="{{ emp_id }}">Edit Profile</button></td>
   </form>
 	</span>
   <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
