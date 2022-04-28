@@ -79,6 +79,7 @@
           <td data-title="Overtime hours">{{ item[14] }}</td>
           <td data-title="Payroll" data-type="currency">{{ item[15] }}</td>
           <form action="/search_employee_function" autocomplete="on" method="POST">
+            <input type="hidden" name="overtime_hours" value= "{{ item[14] }}"/>
             <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
           </form>
           <form action="/delete_overtime_function" autocomplete="on" method="POST">
