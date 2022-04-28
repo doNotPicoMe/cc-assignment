@@ -273,7 +273,7 @@ def add_payroll_deduction_function():
     payrollString = str(payroll)
     deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
 
-    deduct_payroll_sql="UPDATE payroll VALUES late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    deduct_payroll_sql="UPDATE payroll SET late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
     cursor.execute(deduct_payroll_sql,(late_hours,payroll,emp_id))
     db_conn.commit()
 
