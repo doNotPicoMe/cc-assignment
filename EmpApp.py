@@ -319,7 +319,7 @@ def add_overtime_function():
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt + (overtimeHoursInt*100)
     payrollString = str(payroll)
-    add_overtime_sql="UPDATE payroll VALUES overtime_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    add_overtime_sql="UPDATE payroll SET overtime_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
     cursor.execute(add_overtime_sql,(overtime_hours, payrollString, emp_id))
     db_conn.commit()
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
