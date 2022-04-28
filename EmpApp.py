@@ -297,10 +297,6 @@ def overtime():
     else:
         return render_template('Overtime.html', data=data)
 
-@app.route("/add_overtime", methods=['GET', 'POST'])
-def add_overtime():
-    return render_template('AddOvertime.html')
-
 @app.route("/add_overtime_function",methods=['GET','POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
@@ -358,7 +354,9 @@ def delete_overtime_function():
             else:
                 return render_template('Overtime.html', data=data)
 
-        finally:
+@app.route("/add_overtime", methods=['GET', 'POST'])
+def add_overtime():
+    return render_template('AddOvertime.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
