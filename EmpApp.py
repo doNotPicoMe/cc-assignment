@@ -254,7 +254,7 @@ def add_overtime():
 @app.route("/delete_overtime_function", methods=['GET', 'POST'])
 def delete_overtime_function():
     emp_id=request.form['emp_id']
-    late_hours="0
+    late_hours="0"
     search_sql= "SELECT salary FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
     try:
