@@ -263,7 +263,7 @@ def delete_overtime_function():
         for row in records:
             salary= row[0]
     # update_sql= 'UPDATE employee SET first_name = "first_name", last_name = "last_name", age = "age", gender = "gender", location = "location", pri_skill= "pri_skill", email = "email", department = "department", job="job", salary ="salary", hire_date = "hire_date" WHERE emp_id = "emp_id"'
-    update_sql= "UPDATE payroll SET late_hours=(%s), salary=(%s) WHERE emp_id=(%s)"
+        update_sql= "UPDATE payroll SET late_hours=(%s), salary=(%s) WHERE emp_id=(%s)"
 
     if emp_image_file.filename == "":
         return "Please select a file"
