@@ -75,7 +75,7 @@
       </form>
       <form class="register-form" action="/search_employee_function" autocomplete="on" method="POST">
       <input type="text" name="emp_id" placeholder="Employee ID"/>
-      <button type="submit" id="fetchButton">Fetch Info</button>
+      <button type="submit" id="fetchButton">Search</button>
       <p class="message">Want to add an employee? <a href="#">Click Here</a></p>
     </form>
     </div>
@@ -84,7 +84,6 @@
   <script>
   //get a reference to the element
   var register = document.getElementById('registerButton');
-
 
   //add event listener
   register.addEventListener('click', function(event) {
