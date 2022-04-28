@@ -267,7 +267,7 @@ def add_payroll_deduction_function():
         salary = row[0]
 
     salaryInt= int(salary)
-    overtimeHoursInt= int(overtime_hours)
+    overtimeHoursInt= int(late_hours)
     # For every hour of OT, salary is increased by 100
     payroll = salaryInt - (overtimeHoursInt*10)
     payrollString = str(payroll)
