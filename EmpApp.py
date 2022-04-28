@@ -36,8 +36,28 @@ def search_employee():
 @app.route("/my_profile", methods=['GET', 'POST'])
 def my_profile():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM employee WHERE job='admin'")
-    data = cursor.fetchall()
+    emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
+    try:
+        cursor.execute("SELECT * FROM employee WHERE job='admin'")
+        cursor.execute(search_sql,(emp_id))
+        records = cursor.fetchall()
+        for row in records:
+            first_name= row[1]
+            last_name = row[2]
+            age= row[3]
+            gender= row[4]
+            location= row[5]
+            pri_skill= row[6]
+            email= row[7]
+            department= row[8]
+            job= row[9]
+            salary= row[10]
+            hire_date= row[11]
+            emp_name = "" + first_name + " " + last_name
+    # iterate over the cursor
+    finally:
+        cursor.close()
+
     return render_template('MyProfile.html',data=data)
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
