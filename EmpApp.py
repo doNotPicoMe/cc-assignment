@@ -308,9 +308,7 @@ def delete_overtime_function():
             else:
                 return render_template('Overtime.html', data=data)
 
-@app.route("/payroll", methods=['GET', 'POST'])
-def payroll():
-    return render_template('Payroll.html')
+
 
 @app.route("/payroll_deduction", methods=['GET', 'POST'])
 def payroll_deduction():
@@ -322,6 +320,10 @@ def payroll_deduction():
         return render_template('PayrollDeduction.html')
     else:
         return render_template('PayrollDeduction.html', data=data)
+
+@app.route("/payroll", methods=['GET', 'POST'])
+def payroll():
+    return render_template('Payroll.html')
 
 @app.route("/add_payroll_deduction", methods=['GET', 'POST'])
 def add_payroll_deduction():
