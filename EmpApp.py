@@ -258,33 +258,59 @@ def add_payroll_deduction():
 @app.route("/add_payroll_deduction_function", methods=['GET', 'POST'])
 def add_payroll_deduction_function():
     emp_id= request.form['emp_id']
-    late_hours= request.form['overtime_hours']
     salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
+
     for row in records:
         salary = row[0]
 
+    late_hours= request.form['late_hours']
     salaryInt= int(salary)
-    overtimeHoursInt= int(late_hours)
-    # For every hour of OT, salary is increased by 100
-    payroll = salaryInt - (overtimeHoursInt*10)
+    lateHoursInt= int(late_hours)
+
+    # For every hour of being late, salary is deducted by 10
+    payroll = salaryInt + (lateHoursInt*10)
     payrollString = str(payroll)
-    deduct_payroll_sql="INSERT into payroll VALUES (%s,%s,%s,%s,%s)"
 
-    deduct_payroll_sql="UPDATE payroll SET late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
-    cursor.execute(deduct_payroll_sql,(late_hours,payroll,emp_id))
+    add_late_sql="UPDATE payroll SET late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
+    cursor.execute(add_late_sql,(late_hours, payrollString, emp_id))
     db_conn.commit()
+    cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
+    data = cursor.fetchall()
 
+    if data == None:
+        return render_template('PayrollDeduction.html')
+    else:
+        return render_template('PayrollDeduction.html', data=data)
+
+@app.route("/delete_payroll_deduction_function", methods=['GET', 'POST'])
+def delete_late_function():
+    emp_id=request.form['emp_id']
+    late_hours=request.form['late_hours']
+    lateHoursInt= int(late_hours)
+
+    payroll_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
+    cursor.execute(payroll_sql,(emp_id))
+    records = cursor.fetchall()
+    for row in records:
+        payroll = row[0]
+
+    payrollInt = int(payroll)
+    reset_payroll = payrollInt + (lateHoursInt*10)
+    resetPayrollString = str(reset_payroll)
+
+    update_sql= "UPDATE payroll SET late_hours='0', payroll=(%s) WHERE emp_id=(%s)"
+    cursor.execute(update_sql,(resetPayrollString,emp_id))
+    db_conn.commit()
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
     if data == None:
         return render_template('PayrollDeduction.html')
     else:
         return render_template('PayrollDeduction.html', data=data)
-
 
 @app.route("/overtime", methods=['GET', 'POST'])
 def overtime():
@@ -356,7 +382,6 @@ def delete_overtime_function():
         return render_template('Overtime.html')
     else:
         return render_template('Overtime.html', data=data)
-
 
 
 if __name__ == '__main__':
