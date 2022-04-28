@@ -53,8 +53,7 @@ def my_profile():
             salary= row[10]
             hire_date= row[11]
             emp_name = "" + first_name + " " + last_name
-
-    emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
+            emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     # iterate over the cursor
     finally:
         cursor.close()
