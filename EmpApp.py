@@ -19,6 +19,8 @@ db_conn = connections.Connection(
 )
 output = {}
 table = 'employee'
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=True)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -357,6 +359,3 @@ def delete_overtime_function():
                 return render_template('Overtime.html', data=data)
         finally:
             cursor.close()
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
