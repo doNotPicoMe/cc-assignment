@@ -100,44 +100,6 @@
       </tfoot>
     </table>
   </div>
-  <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-  <script>
-  //get a reference to the element
-  var delete= document.getElementById('delete');
-  var editButton = document.getElementById('editButton');
-
-  //add event listener
-  delete.addEventListener('click', function(event) {
-    swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Confirm!'
-    }).then(function(){
-        alert("The confirm button was clicked");
-    }).catch(function(reason){
-        alert("The alert was dismissed by the user: "+reason);
-    });
-  });
-  editButton.addEventListener('click', function(event) {
-    swal({
-      title: "Are you sure?",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: '#DD6B55',
-      confirmButtonText: 'Yes, I am sure!',
-      cancelButtonText: "No, cancel it!",
-      closeOnConfirm: false,
-      closeOnCancel: false
-    },
-    .then(() => {
-      dispatch(redirect('/'));
-    });
-  });
-  </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script  src="{{ url_for("static",filename='NavBarScript.js') }}"></script>
 </body>
