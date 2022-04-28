@@ -282,13 +282,12 @@ def delete_overtime_function():
 @app.route("/add_overtime_function", methods=['GET', 'POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
-
     salary_sql="SELECT CAST(payroll as UNSIGNED INTEGER) FROM payroll WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
-        for row in records:
-            salary = row[0]
+    for row in records:
+        salary = row[0]
     overtime_hours= request.form['overtime_hours']
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
@@ -299,7 +298,6 @@ def add_overtime_function():
     add_overtime_sql="UPDATE payroll VALUES overtime_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
     cursor.execute(add_overtime_sql,(overtime_hours, payrollString, emp_id))
     db_conn.commit()
-
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
