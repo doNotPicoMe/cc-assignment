@@ -297,6 +297,10 @@ def overtime():
     else:
         return render_template('Overtime.html', data=data)
 
+@app.route("/add_overtime", methods=['GET', 'POST'])
+def add_overtime():
+    return render_template('AddOvertime.html')
+
 @app.route("/add_overtime_function",methods=['GET','POST'])
 def add_overtime_function():
     emp_id= request.form['emp_id']
@@ -342,21 +346,17 @@ def delete_overtime_function():
 
         if emp_image_file.filename == "":
             return "Please select a file"
-
         try:
             cursor.execute(update_sql,(late_hours,salary,emp_id))
             db_conn.commit()
             cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
             data = cursor.fetchall()
-
             if data == None:
                 return render_template('Overtime.html')
             else:
                 return render_template('Overtime.html', data=data)
-
-@app.route("/add_overtime", methods=['GET', 'POST'])
-def add_overtime():
-                return render_template('AddOvertime.html')
+        finally:
+            cursor.close()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
