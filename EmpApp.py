@@ -287,8 +287,8 @@ def add_overtime_function():
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
-    for row in records:
-        salary = row[0]
+        for row in records:
+            salary = row[0]
     overtime_hours= request.form['overtime_hours']
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
