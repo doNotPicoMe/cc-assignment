@@ -59,19 +59,17 @@
   <section class="background_container">
     <section class="profile_container">
       <div class="profile_img_section">
-        <!-- <img class="profile_img-LG" src="https://cdn.idntimes.com/content-images/community/2020/10/122163576-262420488513552-863075192792965334-n-f95e3dd6d25d3618eb9f1b3b9bcc5796.jpg" /> -->
-  <!-- <img class="profile_img-LG" src="{{ image_url }}" /> -->
-  <img class="profile_img-LG" src="../static/SUZY.jpg"/>
+      <img class="profile_img-LG" src="{{ image_url }}" />
       </div>
-
       <div class="profile_desc_section">
-        <h2>{{ fname }}{{ lname }} </h2>
-        <h3>CEO</h3>
+        <h2>{{emp_name}} </h2>
+        <h3>{{ emp_id }}</h3>
+        <h3>{{ job }}</h3>
         <p class="description">{{ gender }}</p>
-        <p class="description">{{ email }}</p>
         <div class="interests">
-          <span class="interests_item">{{ department }}</span>
-          <span class="interests_item">{{ salary }}</span>
+          <span class="interests_item">{{ location }}</span>
+          <span class="interests_item">{{ pri_skill }}</span>
+          <span class="interests_item">{{ hire_date }}</span>
         </div>
       </div>
     </section>
