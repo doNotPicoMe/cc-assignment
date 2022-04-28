@@ -32,15 +32,13 @@ def home_page():
 def search_employee():
     return render_template('SearchEmployee.html')
 
-
-@app.route("/my_profile", methods=['GET', 'POST'])
+@app.route("/my_profile", methods=['GET','POST'])
 def my_profile():
     cursor = db_conn.cursor()
     try:
         cursor.execute("SELECT * FROM employee WHERE job='admin'")
         records = cursor.fetchall()
         for row in records:
-            emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
@@ -55,10 +53,12 @@ def my_profile():
             emp_name = "" + first_name + " " + last_name
             emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     # iterate over the cursor
+
     finally:
         cursor.close()
 
-    return render_template('MyProfile.html',data=data)
+    # Not relevant to our design
+    return render_template('MyProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
 def employee_documentation():
