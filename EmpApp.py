@@ -274,10 +274,10 @@ def delete_overtime_function():
             cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
             data = cursor.fetchall()
 
-        if data == None:
-            return render_template('Overtime.html')
-        else:
-            return render_template('Overtime.html', data=data)
+            if data == None:
+                return render_template('Overtime.html')
+            else:
+                return render_template('Overtime.html', data=data)
 
 @app.route("/add_overtime_function", methods=['GET', 'POST'])
 def add_overtime_function():
