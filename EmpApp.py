@@ -68,7 +68,7 @@ def add_employee_function():
     overtime_hours= "0"
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
+    insert_sql= "INSERT into employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
     insert_payroll_sql= "INSERT into payroll VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
