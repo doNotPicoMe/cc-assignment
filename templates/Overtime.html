@@ -65,7 +65,7 @@
           <th scope="col">Overtime Hours</th>
           <th scope="col">Payroll(RM)</th>
           <th scope="col">View Profile</th>
-          <th scope="col">Delete</th>
+          <th scope="col">Reset</th>
         </tr>
       </thead>
       <tbody>
@@ -82,7 +82,7 @@
             <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
           </form>
           <form action="/delete_overtime_function" autocomplete="on" method="POST">
-            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="emp_id" value="{{ item[0] }}">delete</button></td>
+            <td data-title="Edit Profile"><button id="deleteButton" type="submit"  name="emp_id" value="{{ item[0] }}">reset</button></td>
           </form>
         </tr>
         {% endfor %}
