@@ -62,6 +62,7 @@
           <th scope="col">Job</th>
           <th scope="col">Department</th>
           <th scope="col">Salary (RM)</th>
+          <th scope="col">Late hours</th>
           <th scope="col">Deducted Payroll(RM)</th>
           <th scope="col">View Profile</th>
           <th scope="col">Delete</th>
@@ -75,7 +76,8 @@
           <td data-title="Job">{{ item[9] }}</td>
           <td data-title="Department">{{ item[8] }}</td>
           <td data-title="Salary" data-type="currency">{{ item[10] }}</td>
-          <td data-title="Payroll" data-type="currency">{{ item[14] }}</td>
+          <td data-title="Overtime hours">{{ item[13] }}</td>
+          <td data-title="Payroll" data-type="currency">{{ item[15] }}</td>
           <form action="/search_employee_function" autocomplete="on" method="POST">
             <td data-title="Resume"><button id="resumeButton" type="submit" name="emp_id" value="{{ item[0] }}" >view</button></td>
           </form>
@@ -88,7 +90,7 @@
       <tfoot>
         <tr>
           <form action="/add_payroll_deduction" autocomplete="on" method="POST">
-            <td data-title="Delete"><button id="AddPayrollDeduction" type="submit">Add Payroll Deduction</button></td>
+            <td data-title="Delete"><button id="addOvertimeButton" type="submit">Add Payroll Deduction</button></td>
           </form>
         </tr>
         <tr>
