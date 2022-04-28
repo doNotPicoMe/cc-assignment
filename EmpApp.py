@@ -40,6 +40,7 @@ def my_profile():
         cursor.execute("SELECT * FROM employee WHERE job='admin'")
         records = cursor.fetchall()
         for row in records:
+            emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
