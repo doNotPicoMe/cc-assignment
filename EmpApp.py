@@ -358,5 +358,7 @@ def delete_overtime_function():
             else:
                 return render_template('Overtime.html', data=data)
 
+        finally:
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
