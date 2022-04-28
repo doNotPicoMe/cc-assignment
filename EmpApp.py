@@ -344,7 +344,7 @@ def delete_overtime_function():
         payroll = row[0]
 
     payrollInt = int(payroll)
-    reset_payroll = payrollInt - (overtimeHoursInt*10)
+    reset_payroll = payrollInt - (overtimeHoursInt*100)
     resetPayrollString = str(reset_payroll)
 
     update_sql= "UPDATE payroll SET overtime_hours='0', payroll=(%s) WHERE emp_id=(%s)"
