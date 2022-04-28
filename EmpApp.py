@@ -38,7 +38,6 @@ def my_profile():
     cursor = db_conn.cursor()
     try:
         cursor.execute("SELECT * FROM employee WHERE job='admin'")
-        cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
         for row in records:
             first_name= row[1]
