@@ -103,11 +103,11 @@
   <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
   <script>
   //get a reference to the element
-  var resume = document.getElementById('resumeButton');
-  var edit = document.getElementById('editButton');
+  var deleteButton = document.getElementById('deleteButton');
+  var editButton = document.getElementById('editButton');
 
   //add event listener
-  resume.addEventListener('click', function(event) {
+  deleteButton.addEventListener('click', function(event) {
     swal({
       title: "Are you sure?",
       text: "You will not be able to recover this imaginary file!",
@@ -123,16 +123,19 @@
       dispatch(redirect('/'));
     });
   });
-  edit.addEventListener('click', function(event) {
+  editButton.addEventListener('click', function(event) {
     swal({
-      title: 'Employee was successfully added!',
-      type: 'success',
-    }).then(() => {
-      if (result.value) {
-        // handle Confirm button click
-      } else {
-        // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-      }
+      title: "Are you sure?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, I am sure!',
+      cancelButtonText: "No, cancel it!",
+      closeOnConfirm: false,
+      closeOnCancel: false
+    },
+    .then(() => {
+      dispatch(redirect('/'));
     });
   });
   </script>
