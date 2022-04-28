@@ -59,7 +59,7 @@ def my_profile():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('MyProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
+    return render_template('MyProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
 def employee_documentation():
