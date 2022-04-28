@@ -38,8 +38,7 @@ def my_profile():
     cursor = db_conn.cursor()
     cursor.execute("SELECT * FROM employee WHERE job='admin'")
     data = cursor.fetchall()
-    return render_template('EmployeeDocumentation.html', data=data)
-    return render_template('MyProfile.html')
+    return render_template('MyProfile.html',data=data)
 
 @app.route("/employee_documentation", methods=['GET', 'POST'])
 def employee_documentation():
