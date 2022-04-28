@@ -111,8 +111,11 @@ def add_employee_function():
 @app.route("/delete_profile_function", methods=['GET', 'POST'])
 def delete_profile_function():
     emp_id = request.form['emp_id']
+    delete_payroll_sql = "DELETE FROM payroll where emp_id=(%s)"
     delete_employee_sql = "DELETE FROM employee where emp_id=(%s)"
+
     cursor = db_conn.cursor()
+    cursor.execute(delete_payroll_sql,(emp_id))
     cursor.execute(delete_employee_sql,(emp_id))
     db_conn.commit()
 
