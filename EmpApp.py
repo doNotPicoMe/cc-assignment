@@ -226,8 +226,8 @@ def update_employee_function():
     department = request.form['department']
     search_sql= "SELECT *  FROM employee WHERE emp_id = (%s)"
     emp_image_file = request.files['emp_image_file']
-    # update_sql= 'UPDATE employee SET first_name = "first_name", last_name = "last_name", age = "age", gender = "gender", location = "location", pri_skill= "pri_skill", email = "email", department = "department", job="job", salary ="salary", hire_date = "hire_date" WHERE emp_id = "emp_id"'
     update_sql= "UPDATE employee SET first_name=(%s), last_name=(%s), age=(%s), gender=(%s), location=(%s), pri_skill=(%s), email=(%s), department=(%s), job=(%s), salary=(%s), hire_date=(%s) WHERE emp_id=(%s)"
+    update_payroll_sql= "UPDATE payroll SET payroll=(%s) WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -235,6 +235,8 @@ def update_employee_function():
 
     try:
         cursor.execute(update_sql,(first_name,last_name,age,gender,location,pri_skill,email,department,job,salary,hire_date,emp_id))
+        db_conn.commit()
+        cursor.execute(update_payroll_sql,(salary,emp_id))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
