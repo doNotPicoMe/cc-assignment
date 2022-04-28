@@ -286,8 +286,10 @@ def add_overtime_function():
     cursor = db_conn.cursor()
     cursor.execute(salary_sql,(emp_id))
     records = cursor.fetchall()
+
     for row in records:
         salary = row[0]
+
     overtime_hours= request.form['overtime_hours']
     salaryInt= int(salary)
     overtimeHoursInt= int(overtime_hours)
@@ -301,10 +303,10 @@ def add_overtime_function():
     cursor.execute("SELECT e.*,p.* FROM employee e, payroll p WHERE e.emp_id=p.emp_id")
     data = cursor.fetchall()
 
-    if data == None:
-        return render_template('Overtime.html')
-    else:
-        return render_template('Overtime.html', data=data)
+        if data == None:
+            return render_template('Overtime.html')
+        else:
+            return render_template('Overtime.html', data=data)
 
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
