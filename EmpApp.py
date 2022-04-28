@@ -162,6 +162,7 @@ def search_employee_function():
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
         for row in records:
+            emp_id= row[0]
             first_name= row[1]
             last_name = row[2]
             age= row[3]
@@ -180,7 +181,7 @@ def search_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
+    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url=emp_image_file_name_in_s3)
 
 @app.route("/edit_profile_function", methods=['GET', 'POST'])
 def edit_profile_function():
