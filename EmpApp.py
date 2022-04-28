@@ -271,7 +271,7 @@ def add_payroll_deduction_function():
     lateHoursInt= int(late_hours)
 
     # For every hour of being late, salary is deducted by 10
-    payroll = salaryInt + (lateHoursInt*10)
+    payroll = salaryInt - (lateHoursInt*10)
     payrollString = str(payroll)
 
     add_late_sql="UPDATE payroll SET late_hours=(%s),payroll=(%s) WHERE emp_id=(%s)"
