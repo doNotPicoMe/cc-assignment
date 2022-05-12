@@ -1,6 +1,6 @@
 customhost = "cc-asm.cge3padjnblm.us-east-1.rds.amazonaws.com"
 customuser = "admin"
-custompass = "123456789"
+custompass = "12345678"
 customdb = "employee"
 custombucket = "david-jeremy-jaedon-cc-asm-employee"
 customregion = "us-east-1"
