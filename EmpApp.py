@@ -157,7 +157,7 @@ def search_employee_function():
 
     search_sql= "SELECT *  FROM employee WHERE emp_id = (%s)"
     cursor = db_conn.cursor()
-    emp_image_file_name_in_s3 = "https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
+    emp_image_file_name_in_s3 = "https://david-jeremy-jaedon-cc-asm-bucket.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     try:
         cursor.execute(search_sql,(emp_id))
         records = cursor.fetchall()
