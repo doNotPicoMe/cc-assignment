@@ -130,7 +130,7 @@ def add_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
+    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://david-jeremy-jaedon-cc-asm-bucket.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
 @app.route("/delete_profile_function", methods=['GET', 'POST'])
 def delete_profile_function():
@@ -264,7 +264,7 @@ def update_employee_function():
         cursor.close()
 
     # Not relevant to our design
-    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://jeremy-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
+    return render_template('EmployeeProfile.html', emp_id=emp_id,emp_name=emp_name,gender=gender,pri_skill=pri_skill, job=job,location=location, hire_date=hire_date,image_url="https://david-jeremy-jaedon-cc-asm-bucket.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file")
 
 @app.route("/payroll", methods=['GET', 'POST'])
 def payroll():
